@@ -57,14 +57,6 @@ class IOSGenerator(params: KmpModuleModel, private val isProject: Boolean) : Pla
     }
 
     override fun addToCommon(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
-        val relativePath = if (isProject) {
-            "${params.sharedName}/src/iosMain/kotlin/$packageName/${params.sharedName}/Platform.ios.kt"
-        } else "src/iosMain/kotlin/$packageName/${params.moduleName}/Platform.ios.kt"
-        return listOf(
-            GeneratorTemplateFile(
-                relativePath,
-                ftManager.getCodeTemplate(TemplateGroup.IOS_PLATFORM)
-            )
-        )
+        return emptyList()
     }
 }

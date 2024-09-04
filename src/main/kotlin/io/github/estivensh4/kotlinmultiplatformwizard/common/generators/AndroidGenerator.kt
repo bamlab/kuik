@@ -32,15 +32,6 @@ class AndroidGenerator(
 
     override fun addToCommon(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
 
-        val relativePath = if (isProject) {
-            "${params.sharedName}/src/androidMain/kotlin/$packageName/${params.sharedName}/Platform.android.kt"
-        } else "src/androidMain/kotlin/$packageName/${params.moduleName}/Platform.android.kt"
-
-        return listOf(
-            GeneratorTemplateFile(
-                relativePath,
-                ftManager.getCodeTemplate(TemplateGroup.DEFAULT_PLATFORM)
-            )
-        )
+        return emptyList()
     }
 }

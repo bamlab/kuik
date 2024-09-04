@@ -27,11 +27,6 @@ class ModuleCommonGenerator(
 
         //Common
         +GeneratorTemplateFile(
-            "src/commonMain/kotlin/$packageName/${params.moduleName}/Platform.kt",
-            ftManager.getCodeTemplate(TemplateGroup.COMMON_PLATFORM)
-        )
-
-        +GeneratorTemplateFile(
             "build.gradle.kts",
             ftManager.getCodeTemplate(TemplateGroup.COMMON_BUILD)
         )

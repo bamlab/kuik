@@ -56,11 +56,6 @@ class CommonGenerator(
             ftManager.getCodeTemplate(TemplateGroup.COMMON_APP)
         )
 
-        +GeneratorTemplateFile(
-            "${params.sharedName}/src/commonMain/kotlin/$packageName/${params.sharedName}/Platform.kt",
-            ftManager.getCodeTemplate(TemplateGroup.COMMON_PLATFORM)
-        )
-
         if (params.hasServer) {
             +GeneratorTemplateFile(
                 "${params.sharedName}/src/commonMain/kotlin/$packageName/${params.sharedName}/Constants.kt",
