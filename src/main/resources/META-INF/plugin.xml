@@ -34,8 +34,9 @@
     <extensions defaultExtensionNs="com.android">
         <moduleDescriptionProvider implementation="io.github.estivensh4.kotlinmultiplatformwizard.module.KmpModuleDescriptionProvider"/>
     </extensions>
-
-    <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
-        <wizardTemplateProvider implementation="io.github.estivensh4.kotlinmultiplatformwizard.project.KmpProjectTemplateProvider"/>
-    </extensions>
+    <!--
+        <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
+            <wizardTemplateProvider implementation="io.github.estivensh4.kotlinmultiplatformwizard.project.KmpProjectTemplateProvider"/>
+        </extensions>
+         -->
 </idea-plugin>
