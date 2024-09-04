@@ -2,11 +2,14 @@ package io.github.estivensh4.kotlinmultiplatformwizard.module
 
 import com.android.tools.idea.wizard.model.SkippableWizardStep
 import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.editor.Document
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.vfs.VirtualFile
 import io.github.estivensh4.kotlinmultiplatformwizard.common.models.KmpModuleModel
+import io.github.estivensh4.kotlinmultiplatformwizard.common.utils.file.findBlock
+import io.github.estivensh4.kotlinmultiplatformwizard.common.utils.file.findDependencyInsertionPoint
 import java.io.IOException
 import javax.swing.JComponent
 
@@ -26,8 +29,9 @@ class KmpConfigureModuleStep(
 
     override fun onProceeding() {
         super.onProceeding()
-        model.packageName = panel.getPackageName().substringBeforeLast(".")
         model.moduleName = panel.getModuleName()
+        model.packageName = panel.getPackageName().substringBeforeLast(".")
+        model.moduleLowerCase = panel.getPackageName().substringAfterLast(".")
         model.hasAndroid = panel.isIncludeAndroid()
         model.hasIOS = panel.isIncludeIos()
         model.hasWeb = panel.isIncludeWeb()
@@ -47,9 +51,30 @@ class KmpConfigureModuleStep(
                 val moduleDir = createDirectory(baseDir, model.moduleName)
                 KmpModuleRecipe().executeRecipe(project, model, moduleDir)
                 addModuleToSettingsGradle(project, model.moduleName)
+                addModuleDependencyToMainApp(project, model.moduleName)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+        }
+    }
+
+    private fun addModuleDependencyToMainApp(project: Project, moduleName: String) {
+        // TODO can find the main app in another module than composeApp
+        val buildFile =
+            project.guessProjectDir()?.findFileByRelativePath("composeApp")?.findFileByRelativePath("build.gradle.kts")
+        if (buildFile != null) {
+            WriteCommandAction.runWriteCommandAction(project) {
+                try {
+                    val document = FileDocumentManager.getInstance().getDocument(buildFile)
+                    if (document != null) {
+                        reallyWrite(document, moduleName)
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        } else {
+            println("Error: main app build.gradle.kts file not found.")
         }
     }
 
@@ -72,6 +97,35 @@ class KmpConfigureModuleStep(
             }
         } else {
             println("Error: settings.gradle.kts file not found.")
+        }
+    }
+
+    private fun reallyWrite(document: Document, moduleName: String) {
+        val content = document.text
+
+        // Find the full kotlin { } block
+        val kotlinBlockMatch = findBlock(Regex("""kotlin\s*\{\s*"""), content)
+        if (kotlinBlockMatch != null) {
+            val kotlinBlockContent = content.substring(kotlinBlockMatch.startIndex, kotlinBlockMatch.endIndex + 1)
+
+            // Find the position to insert the dependency within the kotlin block
+            val insertionPoint = findDependencyInsertionPoint(kotlinBlockContent)
+
+            if (insertionPoint != null) {
+                // Adjust the insertion point relative to the whole content
+                val adjustedInsertionPoint: Int = kotlinBlockMatch.startIndex + insertionPoint
+
+                // Insert the dependency line at the found position
+                val newModuleEntry = "implementation(project(\":$moduleName\"))"
+                if (!document.text.contains(newModuleEntry)) {
+                    document.insertString(adjustedInsertionPoint, "$newModuleEntry\n")
+                }
+                FileDocumentManager.getInstance().saveDocument(document)
+            } else {
+                println("Error: Could not find a suitable 'commonMain.dependencies { }' block.")
+            }
+        } else {
+            println("Error: Could not find the 'kotlin { }' block.")
         }
     }
 

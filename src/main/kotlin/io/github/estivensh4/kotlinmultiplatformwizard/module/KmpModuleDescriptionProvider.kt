@@ -27,7 +27,7 @@ class KmpModuleDescriptionProvider : ModuleDescriptionProvider {
         override val icon: Icon
             get() = IconLoader.getIcon("/icons/pluginIcon.svg", KmpModuleModel::class.java)
         override val name: String
-            get() = "KMP Shared Module"
+            get() = "Theodo KMP Shared Module"
 
         override fun createStep(
             project: Project,

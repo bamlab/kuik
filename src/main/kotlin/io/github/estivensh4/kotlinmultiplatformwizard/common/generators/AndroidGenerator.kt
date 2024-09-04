@@ -2,6 +2,7 @@ package io.github.estivensh4.kotlinmultiplatformwizard.common.generators
 
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
+import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import io.github.estivensh4.kotlinmultiplatformwizard.common.models.KmpModuleModel
 import io.github.estivensh4.kotlinmultiplatformwizard.common.utils.TemplateGroup
@@ -31,7 +32,8 @@ class AndroidGenerator(
     }
 
     override fun addToCommon(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
-
-        return emptyList()
+        return listOf(
+            GeneratorEmptyDirectory("src/androidMain/kotlin/${packageName.replace(".", "/")}/${params.moduleLowerCase}")
+        )
     }
 }

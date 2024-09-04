@@ -13,7 +13,7 @@ class KmpModuleModel : WizardModel() {
     var hasServer: Boolean by mutableStateOf(false)
 
     var packageName by mutableStateOf("com.example")
-    var sharedName by mutableStateOf("shared")
+    var moduleLowerCase by mutableStateOf("shared")
     var composeName by mutableStateOf("composeApp")
     var serverName by mutableStateOf("server")
     var moduleName by mutableStateOf("")

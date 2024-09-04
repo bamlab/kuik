@@ -12,6 +12,7 @@ class KmpModuleConfigurationPanel : JPanel() {
     private val defaultPackage = "com.example"
     private val packageNameLabel: JLabel = JLabel("Package Name:")
     private val packageNameField: JTextField = JTextField(15)
+    private val completePackageNameField: JLabel = JLabel("")
 
     private val moduleNameLabel: JLabel = JLabel("Module Name:")
     val moduleNameField: JTextField = JTextField(15)
@@ -28,7 +29,8 @@ class KmpModuleConfigurationPanel : JPanel() {
         includeIosCheckBox.isSelected = true
 
         moduleNameField.text = "kmpsharedmodule"
-        packageNameField.text = "${defaultPackage}.kmpsharedmodule"
+        packageNameField.text = defaultPackage
+        updatePackageName()
 
         moduleNameField.document.addDocumentListener(object : DocumentListener {
             override fun insertUpdate(e: DocumentEvent?) {
@@ -41,6 +43,20 @@ class KmpModuleConfigurationPanel : JPanel() {
 
             override fun changedUpdate(e: DocumentEvent?) {
                 validateModuleName()
+            }
+        })
+
+        packageNameField.document.addDocumentListener(object : DocumentListener {
+            override fun insertUpdate(e: DocumentEvent?) {
+                updatePackageName()
+            }
+
+            override fun removeUpdate(e: DocumentEvent?) {
+                updatePackageName()
+            }
+
+            override fun changedUpdate(e: DocumentEvent?) {
+                updatePackageName()
             }
         })
 
@@ -74,6 +90,10 @@ class KmpModuleConfigurationPanel : JPanel() {
         gbc.gridy = 2
         gbc.gridwidth = 2
         add(packageNameField, gbc)
+        gbc.gridx = 1
+        gbc.gridy = 3
+        gbc.gridwidth = 2
+        add(completePackageNameField, gbc)
 
         // Include Platforms
         val platformPanel = JPanel(GridLayout(1, 4))
@@ -98,11 +118,9 @@ class KmpModuleConfigurationPanel : JPanel() {
     private fun validateModuleName() {
         val moduleName = moduleNameField.text.trim()
         if (moduleName.isEmpty()) {
-            moduleNameField.background = JBColor.PINK
             moduleNameErrorLabel.text = "Please a enter a valid module name"
             moduleNameErrorLabel.isVisible = true
         } else {
-            moduleNameField.background = JBColor.DARK_GRAY
             moduleNameErrorLabel.isVisible = false
         }
 
@@ -110,12 +128,12 @@ class KmpModuleConfigurationPanel : JPanel() {
     }
 
     private fun updatePackageName() {
-        val moduleName = moduleNameField.text.trim()
-        val packageName = "${defaultPackage}.${moduleName.lowercase()}"
-        packageNameField.text = packageName
+        val moduleName = moduleNameField.text.trim().lowercase()
+        val packageName = packageNameField.text.trim().lowercase()
+        completePackageNameField.text = "$packageName.$moduleName"
     }
 
-    fun getPackageName(): String = packageNameField.text.trim()
+    fun getPackageName(): String = completePackageNameField.text.trim()
     fun getModuleName(): String = moduleNameField.text.trim()
     fun isIncludeAndroid(): Boolean = includeAndroidCheckBox.isSelected
     fun isIncludeIos(): Boolean = includeIosCheckBox.isSelected

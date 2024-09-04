@@ -18,7 +18,7 @@ class KmpWizardTemplate {
 
     val projectTemplate
         get() = template {
-            name = "Kotlin Multiplatform"
+            name = "Theodo Kotlin Multiplatform"
             description =
                 "Creates a new Kotlin Multiplatform project that include iOS, Android, Desktop, Web And Server applications and a module with code shared."
             minApi = 26
@@ -113,7 +113,7 @@ class KmpWizardTemplate {
             "APP_NAME" to moduleData.themesData.appName,
             "APP_NAME_LOWERCASE" to moduleData.themesData.appName.lowercase(),
             "PACKAGE_NAME" to packageName,
-            "SHARED_NAME" to model.sharedName,
+            "SHARED_NAME" to model.moduleLowerCase,
             "COMPOSE_NAME" to model.composeName,
             "SERVER_NAME" to model.serverName,
             "MODULE_NAME" to moduleData.name,

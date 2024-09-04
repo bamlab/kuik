@@ -20,7 +20,7 @@ class DesktopGenerator(params: KmpModuleModel, private val isProject: Boolean) :
 
     override fun addToCommon(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
         val relativePath = if (isProject) {
-            "${params.sharedName}/src/jvmMain/kotlin/$packageName/${params.sharedName}/Platform.jvm.kt"
+            "${params.moduleLowerCase}/src/jvmMain/kotlin/$packageName/${params.moduleLowerCase}/Platform.jvm.kt"
         } else {
             "src/jvmMain/kotlin/$packageName/${params.moduleName}/Platform.jvm.kt"
         }

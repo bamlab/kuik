@@ -16,7 +16,7 @@ class KmpModuleRecipe {
         val ftManager = FileTemplateManager.getInstance(project)
         val templateData = mapOf(
             "PACKAGE_NAME" to model.packageName,
-            "SHARED_NAME" to model.moduleName,
+            "SHARED_NAME" to model.moduleLowerCase,
             "MODULE_NAME" to model.moduleName,
             "HAS_ANDROID" to model.hasAndroid,
             "HAS_IOS" to model.hasIOS,

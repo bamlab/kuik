@@ -28,7 +28,7 @@ class WasmGenerator(params: KmpModuleModel, private val isProject: Boolean) : Pl
 
     override fun addToCommon(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
         val relativePath = if (isProject) {
-            "${params.sharedName}/src/wasmJsMain/kotlin/$packageName/${params.sharedName}/Platform.wasmJs.kt"
+            "${params.moduleLowerCase}/src/wasmJsMain/kotlin/$packageName/${params.moduleLowerCase}/Platform.wasmJs.kt"
         } else "src/wasmJsMain/kotlin/$packageName/${params.moduleName}/Platform.wasmJs.kt"
         return listOf(
             GeneratorTemplateFile(

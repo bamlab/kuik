@@ -58,13 +58,13 @@ class CommonGenerator(
 
         if (params.hasServer) {
             +GeneratorTemplateFile(
-                "${params.sharedName}/src/commonMain/kotlin/$packageName/${params.sharedName}/Constants.kt",
+                "${params.moduleLowerCase}/src/commonMain/kotlin/$packageName/${params.moduleLowerCase}/Constants.kt",
                 ftManager.getCodeTemplate(TemplateGroup.SHARED_CONSTANTS)
             )
         }
 
         +GeneratorTemplateFile(
-            "${params.sharedName}/src/commonMain/kotlin/$packageName/${params.sharedName}/Greeting.kt",
+            "${params.moduleLowerCase}/src/commonMain/kotlin/$packageName/${params.moduleLowerCase}/Greeting.kt",
             ftManager.getCodeTemplate(TemplateGroup.SHARED_GREETING)
         )
 
@@ -74,7 +74,7 @@ class CommonGenerator(
         )
 
         +GeneratorTemplateFile(
-            "${params.sharedName}/build.gradle.kts",
+            "${params.moduleLowerCase}/build.gradle.kts",
             ftManager.getCodeTemplate(TemplateGroup.COMMON_BUILD)
         )
 
