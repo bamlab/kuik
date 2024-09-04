@@ -8,7 +8,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
 }
 
-group = "io.github.estivensh4"
+group = "com.theodo.apps"
 version = "1.0.0"
 
 repositories {

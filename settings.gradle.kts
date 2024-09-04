@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "kotlin-multiplatform-wizard"
+rootProject.name = "kuik"
