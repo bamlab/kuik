@@ -95,17 +95,6 @@ class KmpModuleConfigurationPanel : JPanel() {
         gbc.gridwidth = 2
         add(completePackageNameField, gbc)
 
-        // Include Platforms
-        val platformPanel = JPanel(GridLayout(1, 4))
-        platformPanel.add(includeAndroidCheckBox)
-        platformPanel.add(includeIosCheckBox)
-        platformPanel.add(includeWebCheckBox)
-        platformPanel.add(includeJvmCheckBox)
-
-        gbc.gridx = 0
-        gbc.gridy = 4
-        gbc.gridwidth = 3
-        add(platformPanel, gbc)
 
         gbc.gridx = 0
         gbc.gridy = 5
