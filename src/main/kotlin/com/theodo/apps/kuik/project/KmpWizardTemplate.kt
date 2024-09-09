@@ -75,7 +75,7 @@ class KmpWizardTemplate {
             )
 
             thumb =
-                { Thumb { URL("https://raw.githubusercontent.com/bamlab/kuist-plugin/master/images/project-logo.png") } }
+                { Thumb { URL("https://raw.githubusercontent.com/bamlab/kuik/master/images/project-logo.png") } }
 
             recipe = { data: TemplateData ->
                 projectRecipe(
