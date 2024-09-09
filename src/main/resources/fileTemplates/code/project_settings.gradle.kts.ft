@@ -32,4 +32,3 @@ include(":composeApp")
 <#if HAS_SERVER>
 include(":server")
 </#if>
-include(":${SHARED_NAME}")

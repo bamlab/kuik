@@ -56,26 +56,9 @@ class CommonGenerator(
             ftManager.getCodeTemplate(TemplateGroup.COMMON_APP)
         )
 
-        if (params.hasServer) {
-            +GeneratorTemplateFile(
-                "${params.moduleLowerCase}/src/commonMain/kotlin/$packageName/${params.moduleLowerCase}/Constants.kt",
-                ftManager.getCodeTemplate(TemplateGroup.SHARED_CONSTANTS)
-            )
-        }
-
-        +GeneratorTemplateFile(
-            "${params.moduleLowerCase}/src/commonMain/kotlin/$packageName/${params.moduleLowerCase}/Greeting.kt",
-            ftManager.getCodeTemplate(TemplateGroup.SHARED_GREETING)
-        )
-
         +GeneratorTemplateFile(
             "${params.composeName}/src/commonMain/composeResources/drawable/compose-multiplatform.xml",
             ftManager.getCodeTemplate(TemplateGroup.COMMON_COMPOSE_RESOURCES_MULTIPLATFORM_XML)
-        )
-
-        +GeneratorTemplateFile(
-            "${params.moduleLowerCase}/build.gradle.kts",
-            ftManager.getCodeTemplate(TemplateGroup.COMMON_BUILD)
         )
 
         +GeneratorTemplateFile(
