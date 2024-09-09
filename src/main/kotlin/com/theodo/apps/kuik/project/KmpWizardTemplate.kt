@@ -20,15 +20,13 @@ class KmpWizardTemplate {
         get() = template {
             name = "Theodo Kotlin Multiplatform"
             description =
-                "Creates a new Kotlin Multiplatform project that include iOS, Android, Desktop, Web And Server applications and a module with code shared."
+                "Creates a new Kotlin Multiplatform project that include iOS and Android with theodo standards"
             minApi = 26
             category = Category.Other
             formFactor = FormFactor.Generic
             screens = listOf(
                 WizardUiContext.NewProject,
-                WizardUiContext.NewProjectExtraDetail
             )
-
 
             val includeAndroid = booleanParameter {
                 name = "Include Android"
@@ -65,14 +63,6 @@ class KmpWizardTemplate {
                 default = false
             }
 
-
-            widgets(
-                CheckBoxWidget(includeAndroid),
-                CheckBoxWidget(includeIOS),
-                CheckBoxWidget(includeDesktop),
-                CheckBoxWidget(includeWeb),
-                CheckBoxWidget(includeServer)
-            )
 
             thumb =
                 { Thumb { URL("https://raw.githubusercontent.com/bamlab/kuik/master/images/project-logo.png") } }
