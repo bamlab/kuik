@@ -33,9 +33,7 @@
     <extensions defaultExtensionNs="com.android">
         <moduleDescriptionProvider implementation="com.theodo.apps.kuik.module.KmpModuleDescriptionProvider"/>
     </extensions>
-    <!--
-        <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
-            <wizardTemplateProvider implementation="com.theodo.apps.kuik.project.KmpProjectTemplateProvider"/>
-        </extensions>
-         -->
+    <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
+        <wizardTemplateProvider implementation="com.theodo.apps.kuik.project.KmpProjectTemplateProvider"/>
+    </extensions>
 </idea-plugin>
