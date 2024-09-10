@@ -57,8 +57,12 @@ class IOSGenerator(params: KmpModuleModel, private val isProject: Boolean) : Pla
     }
 
     override fun addToCommon(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
-        return listOf(
-            GeneratorEmptyDirectory("src/iosMain/kotlin/${packageName.replace(".", "/")}/${params.moduleLowerCase}")
-        )
+        return if (isProject) {
+            emptyList()
+        } else {
+            listOf(
+                GeneratorEmptyDirectory("src/iosMain/kotlin/${packageName.replace(".", "/")}/${params.moduleLowerCase}")
+            )
+        }
     }
 }
