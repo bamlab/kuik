@@ -13,6 +13,8 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinter)
+    alias(libs.plugins.convention.module.android)
+
 }
 
 kotlin {
@@ -74,18 +76,6 @@ kotlin {
 }
 
 android {
-    namespace = "${PACKAGE_NAME}.${SHARED_NAME}"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-            minSdk =
-                libs.versions.android.minSdk
-                    .get()
-                    .toInt()
-        }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
     buildFeatures {
         compose = true
     }

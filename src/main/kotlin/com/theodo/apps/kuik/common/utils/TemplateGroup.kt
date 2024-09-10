@@ -38,4 +38,10 @@ object TemplateGroup {
     const val IOS_ASSETS_CONTENTS_JSON = "ios_assets_contents.json"
     const val IOS_PREVIEW_CONTENTS_JSON = "ios_preview_contents.json"
     const val IOS_INFO_PLIST = "ios_info.plist"
+    const val BUILD_LOGIC_SETTINGS = "build-logic_settings.gradle.kts"
+    const val BUILD_LOGIC_GRADLE = "build-logic_gradle.properties"
+    const val BUILD_LOGIC_GRADLE_KTS = "build-logic_build.gradle.kts"
+    const val BUILD_LOGIC_LIBS = "build-logic_libs.kt"
+    const val BUILD_LOGIC_KOTLIN_ANDROID = "build-logic_kotlinandroid.kt"
+    const val BUILD_LOGIC_KOTLIN_MULTIPLATFORM = "build-logic_kotlinmultiplatform.kt"
 }

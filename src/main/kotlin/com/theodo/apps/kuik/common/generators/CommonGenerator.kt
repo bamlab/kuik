@@ -22,7 +22,8 @@ class CommonGenerator(
             if (params.hasDesktop) DesktopGenerator(params, true) else null,
             if (params.hasWeb) WasmGenerator(params, true) else null,
             if (params.hasIOS) IOSGenerator(params, true) else null,
-            if (params.hasServer) ServerGenerator(params, true) else null
+            if (params.hasServer) ServerGenerator(params, true) else null,
+            BuildLogicGenerator(params),
         )
 
         //Project
