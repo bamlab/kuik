@@ -6,13 +6,14 @@ import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
+import com.theodo.apps.kuik.common.utils.toFolders
 
 class IOSGenerator(params: KmpModuleModel, private val isProject: Boolean) : PlatformGenerator(params) {
     override fun generateProject(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
         return if (isProject) {
             listOf(
                 GeneratorTemplateFile(
-                    "${params.composeName}/src/iosMain/kotlin/$packageName/${params.composeName}/MainViewController.kt",
+                    "${params.composeName}/src/iosMain/kotlin/${packageName.toFolders()}/${params.composeName}/MainViewController.kt",
                     ftManager.getCodeTemplate(TemplateGroup.COMPOSE_IOS_MAIN)
                 ),
                 GeneratorEmptyDirectory("iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/configuration"),

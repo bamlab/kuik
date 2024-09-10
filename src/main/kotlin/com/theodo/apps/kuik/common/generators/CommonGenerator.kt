@@ -5,6 +5,7 @@ import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
+import com.theodo.apps.kuik.common.utils.toFolders
 
 class CommonGenerator(
     private val params: KmpModuleModel,
@@ -52,7 +53,7 @@ class CommonGenerator(
 
         //Common
         +GeneratorTemplateFile(
-            "${params.composeName}/src/commonMain/kotlin/$packageName/${params.composeName}/App.kt",
+            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/App.kt",
             ftManager.getCodeTemplate(TemplateGroup.COMMON_APP)
         )
 

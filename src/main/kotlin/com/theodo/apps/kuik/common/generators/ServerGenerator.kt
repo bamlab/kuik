@@ -5,13 +5,14 @@ import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
+import com.theodo.apps.kuik.common.utils.toFolders
 
 class ServerGenerator(params: KmpModuleModel, private val isProject: Boolean) : PlatformGenerator(params) {
     override fun generateProject(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
         return if (isProject) {
             listOf(
                 GeneratorTemplateFile(
-                    "${params.serverName}/src/main/kotlin/$packageName/${params.serverName}/Application.kt",
+                    "${params.serverName}/src/main/kotlin${packageName.toFolders()}/${params.serverName}/Application.kt",
                     ftManager.getCodeTemplate(TemplateGroup.SERVER_APP_MAIN)
                 ),
                 GeneratorTemplateFile(
@@ -30,7 +31,7 @@ class ServerGenerator(params: KmpModuleModel, private val isProject: Boolean) : 
         return if (!isProject) {
             listOf(
                 GeneratorTemplateFile(
-                    "src/jvmMain/kotlin/$packageName/${params.moduleName}/Platform.jvm.kt",
+                    "src/jvmMain/kotlin${packageName.toFolders()}/${params.moduleName}/Platform.jvm.kt",
                     ftManager.getCodeTemplate(TemplateGroup.JVM_PLATFORM)
                 )
             )

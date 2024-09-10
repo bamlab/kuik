@@ -6,6 +6,7 @@ import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
+import com.theodo.apps.kuik.common.utils.toFolders
 
 class AndroidGenerator(
     params: KmpModuleModel,
@@ -18,7 +19,7 @@ class AndroidGenerator(
         if (isProject) {
             listOf(
                 GeneratorTemplateFile(
-                    "${params.composeName}/src/androidMain/kotlin/$packageName/${params.composeName}/MainActivity.kt",
+                    "${params.composeName}/src/androidMain/kotlin/${packageName.toFolders()}/${params.composeName}/MainActivity.kt",
                     ftManager.getCodeTemplate(TemplateGroup.ANDROID_MAINACTIVITY),
                 ),
                 GeneratorTemplateFile(
@@ -44,10 +45,7 @@ class AndroidGenerator(
             listOf(
                 GeneratorEmptyDirectory(
                     "src/androidMain/kotlin/${
-                        packageName.replace(
-                            ".",
-                            "/"
-                        )
+                        packageName.toFolders()
                     }/${params.moduleLowerCase}"
                 ),
             )

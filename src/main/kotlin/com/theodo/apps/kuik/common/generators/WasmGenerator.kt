@@ -5,6 +5,7 @@ import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
+import com.theodo.apps.kuik.common.utils.toFolders
 
 class WasmGenerator(params: KmpModuleModel, private val isProject: Boolean) : PlatformGenerator(params) {
     override fun generateProject(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
@@ -19,7 +20,7 @@ class WasmGenerator(params: KmpModuleModel, private val isProject: Boolean) : Pl
                     ftManager.getCodeTemplate(TemplateGroup.WASMJS_INDEX_HTML)
                 ),
                 GeneratorTemplateFile(
-                    "${params.composeName}/src/wasmJsMain/kotlin/$packageName/${params.composeName}/main.kt",
+                    "${params.composeName}/src/wasmJsMain/kotlin${packageName.toFolders()}/${params.composeName}/main.kt",
                     ftManager.getCodeTemplate(TemplateGroup.COMPOSE_WASM_JS_MAIN)
                 )
             )
@@ -28,8 +29,8 @@ class WasmGenerator(params: KmpModuleModel, private val isProject: Boolean) : Pl
 
     override fun addToCommon(ftManager: FileTemplateManager, packageName: String): List<GeneratorAsset> {
         val relativePath = if (isProject) {
-            "${params.moduleLowerCase}/src/wasmJsMain/kotlin/$packageName/${params.moduleLowerCase}/Platform.wasmJs.kt"
-        } else "src/wasmJsMain/kotlin/$packageName/${params.moduleName}/Platform.wasmJs.kt"
+            "${params.moduleLowerCase}/src/wasmJsMain/kotlin${packageName.toFolders()}/${params.moduleLowerCase}/Platform.wasmJs.kt"
+        } else "src/wasmJsMain/kotlin${packageName.toFolders()}/${params.moduleName}/Platform.wasmJs.kt"
         return listOf(
             GeneratorTemplateFile(
                 relativePath,

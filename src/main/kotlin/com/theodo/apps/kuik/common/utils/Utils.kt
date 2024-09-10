@@ -32,3 +32,8 @@ object Utils {
         }
     }
 }
+
+fun String.toFolders() = replace(
+    ".",
+    "/"
+)
