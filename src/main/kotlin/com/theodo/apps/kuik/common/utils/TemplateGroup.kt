@@ -45,4 +45,5 @@ object TemplateGroup {
     const val BUILD_LOGIC_KOTLIN_MULTIPLATFORM_FEATURE_MODULE = "build-logic_kotlinmultiplatformfeaturemodule.kt"
     const val BUILD_LOGIC_KMP_MODULE = "build-logic_kmpmodule.kt"
     const val BUILD_LOGIC_ANDROID_SDK_VERSION = "build-logic_androidsdkversion.kt"
+    const val BUILD_LOGIC_KMP_TARGETS = "build-logic_kmptargets.kt"
 }

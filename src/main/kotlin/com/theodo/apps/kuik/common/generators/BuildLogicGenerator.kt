@@ -45,6 +45,10 @@ class BuildLogicGenerator(
                 "build-logic/src/main/kotlin/convention/AndroidSdkVersion.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_ANDROID_SDK_VERSION),
             ),
+            GeneratorTemplateFile(
+                "build-logic/src/main/kotlin/convention/KmpTargets.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KMP_TARGETS),
+            ),
 
             )
 
