@@ -38,6 +38,10 @@ class BuildLogicGenerator(
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_FEATURE_MODULE),
             ),
             GeneratorTemplateFile(
+                "build-logic/src/main/kotlin/convention/KotlinMultiplatformModule.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_MODULE),
+            ),
+            GeneratorTemplateFile(
                 "build-logic/src/main/kotlin/convention/KmpModule.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KMP_MODULE),
             ),
