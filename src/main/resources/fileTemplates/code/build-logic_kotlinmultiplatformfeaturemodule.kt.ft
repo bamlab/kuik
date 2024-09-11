@@ -7,10 +7,19 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 class KotlinMultiplatformFeatureModule: Plugin<Project> {
 
     override fun apply(target: Project): Unit = with(target) {
+        configurePlugins()
         val androidExtension = extensions.getByType<LibraryExtension>()
         configureKmpModule(androidExtension)
 
         val kmpExtension = extensions.getByType<KotlinMultiplatformExtension>()
         configureKmpTargets(kmpExtension)
+    }
+
+    private fun Project.configurePlugins() {
+        with(pluginManager) {
+            apply(configLibs.findPlugin("kotlinMultiplatform").get().get().pluginId)
+            apply(configLibs.findPlugin("androidLibrary").get().get().pluginId)
+            apply(configLibs.findPlugin("kotlinter").get().get().pluginId)
+        }
     }
 }
