@@ -1,6 +1,4 @@
 plugins {
-    alias(libs.plugins.jetbrainsCompose)
-    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.convention.module.feature)
 }
 
@@ -18,11 +16,5 @@ kotlin {
            implementation(libs.koin.test)
            implementation(libs.koin.compose)
         }
-    }
-}
-
-android {
-    buildFeatures {
-        compose = true
     }
 }
