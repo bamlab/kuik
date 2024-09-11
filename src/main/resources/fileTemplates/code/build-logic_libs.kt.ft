@@ -5,3 +5,8 @@ import org.gradle.kotlin.dsl.getByType
 
 val Project.configLibs
     get(): VersionCatalog = extensions.getByType(VersionCatalogsExtension::class).named("libs")
+
+fun Project.getModuleName(): String {
+    val moduleName = path.split(":").drop(2).joinToString(".")
+    return moduleName
+}

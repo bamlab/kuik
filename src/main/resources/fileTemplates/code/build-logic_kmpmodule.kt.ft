@@ -7,8 +7,8 @@ internal fun Project.configureKmpModule(
 ) = extension.apply {
     configureAndroidSdkVersion(this)
 
-    //get module name from module path
-    val moduleName = path.split(":").drop(2).joinToString(".")
+    // get module name from module path
+    val moduleName = getModuleName()
     namespace = if(moduleName.isNotEmpty()) "com.example.$moduleName" else "com.example"
 
     packaging {
