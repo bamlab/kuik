@@ -13,7 +13,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinter)
-    alias(libs.plugins.convention.module.android)
+    alias(libs.plugins.convention.module.feature)
 
 }
 

@@ -2,11 +2,9 @@ package com.theodo.apps.kuik.common.generators
 
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
-import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
-import com.theodo.apps.kuik.common.utils.toFolders
 
 class BuildLogicGenerator(
     params: KmpModuleModel,
@@ -32,16 +30,20 @@ class BuildLogicGenerator(
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_GRADLE_KTS),
             ),
             GeneratorTemplateFile(
-                "build-logic/convention/Libs.kt",
+                "build-logic/convention/src/main/kotlin/Libs.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_LIBS),
             ),
             GeneratorTemplateFile(
-                "build-logic/convention/KotlinAndroid.kt",
-                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_ANDROID),
+                "build-logic/src/main/kotlin/convention/KotlinMultiplatformFeatureModule.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_FEATURE_MODULE),
             ),
             GeneratorTemplateFile(
-                "build-logic/convention/KotlinMultiplatform.kt",
-                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM),
+                "build-logic/src/main/kotlin/convention/KmpModule.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KMP_MODULE),
+            ),
+            GeneratorTemplateFile(
+                "build-logic/src/main/kotlin/convention/AndroidSdkVersion.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_ANDROID_SDK_VERSION),
             ),
 
             )

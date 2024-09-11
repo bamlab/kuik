@@ -51,4 +51,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 
-convention-module-android = { id = "convention.module.android", version = "unspecified" }
+convention-module-feature = { id = "convention.module.feature", version = "unspecified" }

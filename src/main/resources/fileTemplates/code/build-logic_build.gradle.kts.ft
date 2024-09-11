@@ -20,9 +20,9 @@ tasks {
 
 gradlePlugin {
     plugins {
-        register("kotlinAndroid") {
-            id = "convention.module.android"
-            implementationClass = "KotlinMultiplatformPlugin"
+        register("kotlinMultiplatformFeatureModule") {
+            id = "convention.module.feature"
+            implementationClass = "KotlinMultiplatformFeatureModule"
         }
     }
 }
