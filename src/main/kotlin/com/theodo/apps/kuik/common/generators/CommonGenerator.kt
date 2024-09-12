@@ -19,10 +19,7 @@ class CommonGenerator(
 
         val generatorList: List<PlatformGenerator> = listOfNotNull(
             if (params.hasAndroid) com.theodo.apps.kuik.common.generators.AndroidGenerator(params, true) else null,
-            if (params.hasDesktop) DesktopGenerator(params, true) else null,
-            if (params.hasWeb) WasmGenerator(params, true) else null,
             if (params.hasIOS) IOSGenerator(params, true) else null,
-            if (params.hasServer) ServerGenerator(params, true) else null,
             BuildLogicGenerator(params),
         )
 
