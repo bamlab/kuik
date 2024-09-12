@@ -34,23 +34,23 @@ class BuildLogicGenerator(
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_LIBS),
             ),
             GeneratorTemplateFile(
-                "build-logic/src/main/kotlin/convention/KotlinMultiplatformFeatureModule.kt",
+                "build-logic/convention/src/main/kotlin/KotlinMultiplatformFeatureModule.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_FEATURE_MODULE),
             ),
             GeneratorTemplateFile(
-                "build-logic/src/main/kotlin/convention/KotlinMultiplatformModule.kt",
+                "build-logic/convention/src/main/kotlin/KotlinMultiplatformModule.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_MODULE),
             ),
             GeneratorTemplateFile(
-                "build-logic/src/main/kotlin/convention/KmpModule.kt",
+                "build-logic/convention/src/main/kotlin/KmpModule.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KMP_MODULE),
             ),
             GeneratorTemplateFile(
-                "build-logic/src/main/kotlin/convention/AndroidSdkVersion.kt",
+                "build-logic/convention/src/main/kotlin/AndroidSdkVersion.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_ANDROID_SDK_VERSION),
             ),
             GeneratorTemplateFile(
-                "build-logic/src/main/kotlin/convention/KmpTargets.kt",
+                "build-logic/convention/src/main/kotlin/KmpTargets.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KMP_TARGETS),
             ),
 
