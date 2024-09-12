@@ -9,14 +9,14 @@ class KotlinMultiplatformFeatureModule : KotlinMultiplatformModule() {
         with(target) {
             with(pluginManager) {
                 apply(
-                    configLibs
+                    libs
                         .findPlugin("jetbrainsCompose")
                         .get()
                         .get()
                         .pluginId,
                 )
                 apply(
-                    configLibs
+                    libs
                         .findPlugin("compose-compiler")
                         .get()
                         .get()
@@ -35,8 +35,8 @@ class KotlinMultiplatformFeatureModule : KotlinMultiplatformModule() {
                     implementation(composeLibs.ui)
                     implementation(composeLibs.components.resources)
                     implementation(composeLibs.components.uiToolingPreview)
-                    implementation(configLibs.findLibrary("koin-core").get())
-                    implementation(configLibs.findLibrary("koin-compose").get())
+                    implementation(libs.findLibrary("koin-core").get())
+                    implementation(libs.findLibrary("koin-compose").get())
                 }
         }
     }
