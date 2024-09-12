@@ -18,12 +18,12 @@ class KmpWizardTemplate {
 
     val projectTemplate
         get() = template {
-            name = "Theodo Kotlin Multiplatform"
+            name = "Theodo Kotlin Multiplatform Project"
             description =
                 "Creates a new Kotlin Multiplatform project that include iOS and Android with theodo standards"
             minApi = 26
-            category = Category.Other
-            formFactor = FormFactor.Generic
+            category = Category.Application
+            formFactor = FormFactor.Mobile
             screens = listOf(
                 WizardUiContext.NewProject,
             )

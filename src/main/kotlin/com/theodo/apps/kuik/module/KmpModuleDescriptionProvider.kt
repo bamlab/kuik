@@ -23,11 +23,11 @@ class KmpModuleDescriptionProvider : ModuleDescriptionProvider {
 
     class FeatureModuleEntry : ModuleGalleryEntry {
         override val description: String
-            get() = ""
+            get() = "Generates a Kotlin Multiplatform module with Theodo standards (android, iOS and common)"
         override val icon: Icon
             get() = IconLoader.getIcon("/icons/theodokotlin.svg", KmpModuleModel::class.java)
         override val name: String
-            get() = "Theodo KMP Shared Module"
+            get() = "Theodo KMP Module"
 
         override fun createStep(
             project: Project,
