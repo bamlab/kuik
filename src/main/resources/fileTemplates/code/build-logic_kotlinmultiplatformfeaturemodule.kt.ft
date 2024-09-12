@@ -1,7 +1,6 @@
 import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
-import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class KotlinMultiplatformFeatureModule : KotlinMultiplatformModule() {
@@ -11,30 +10,34 @@ class KotlinMultiplatformFeatureModule : KotlinMultiplatformModule() {
             with(pluginManager) {
                 apply(
                     configLibs
-                        .findPlugin("compose-gradlePlugin")
+                        .findPlugin("jetbrainsCompose")
                         .get()
                         .get()
                         .pluginId,
                 )
                 apply(
                     configLibs
-                        .findPlugin("compose-compiler-gradlePlugin")
+                        .findPlugin("compose-compiler")
                         .get()
                         .get()
                         .pluginId,
                 )
             }
             extensions.getByType<LibraryExtension>().buildFeatures.compose = true
-            extensions.getByType<KotlinMultiplatformExtension>().sourceSets.getByName("commonMain").dependencies {
-                implementation(composeLibs.runtime)
-                implementation(composeLibs.foundation)
-                implementation(composeLibs.material)
-                implementation(composeLibs.ui)
-                implementation(composeLibs.components.resources)
-                implementation(composeLibs.components.uiToolingPreview)
-                implementation(configLibs.findLibrary("koin-core").get())
-                implementation(configLibs.findLibrary("koin-compose").get())
-            }
+            extensions
+                .getByType<KotlinMultiplatformExtension>()
+                .sourceSets
+                .getByName("commonMain")
+                .dependencies {
+                    implementation(composeLibs.runtime)
+                    implementation(composeLibs.foundation)
+                    implementation(composeLibs.material)
+                    implementation(composeLibs.ui)
+                    implementation(composeLibs.components.resources)
+                    implementation(composeLibs.components.uiToolingPreview)
+                    implementation(configLibs.findLibrary("koin-core").get())
+                    implementation(configLibs.findLibrary("koin-compose").get())
+                }
         }
     }
 }
