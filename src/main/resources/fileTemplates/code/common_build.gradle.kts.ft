@@ -1,20 +1,3 @@
 plugins {
     alias(libs.plugins.convention.module.feature)
 }
-
-kotlin {
-
-    sourceSets {
-        commonMain.dependencies {
-           implementation(compose.runtime)
-           implementation(compose.foundation)
-           implementation(compose.material)
-           implementation(compose.ui)
-           implementation(compose.components.resources)
-           implementation(compose.components.uiToolingPreview)
-           implementation(libs.koin.core)
-           implementation(libs.koin.test)
-           implementation(libs.koin.compose)
-        }
-    }
-}

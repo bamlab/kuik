@@ -2,13 +2,14 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "${PACKAGE_NAME}.buildlogic"
+group = "com.example.buildlogic"
 
 dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.android.tools.common)
-    compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.compose.compiler.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.compose.gradlePlugin)
 }
 
 tasks {
@@ -26,4 +27,3 @@ gradlePlugin {
         }
     }
 }
-
