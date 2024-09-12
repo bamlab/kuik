@@ -5,13 +5,13 @@ import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.compose.ComposePlugin
 
-val Project.configLibs
+internal val Project.libs
     get(): VersionCatalog = extensions.getByType(VersionCatalogsExtension::class).named("libs")
 
-fun Project.getModuleName(): String {
+internal fun Project.getModuleName(): String {
     val moduleName = path.split(":").drop(2).joinToString(".")
     return moduleName
 }
 
-val Project.composeLibs: ComposePlugin.Dependencies
+internal val Project.composeLibs: ComposePlugin.Dependencies
     get() = extensions.getByType<ComposeExtension>().dependencies

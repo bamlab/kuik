@@ -5,14 +5,14 @@ import org.gradle.api.Project
 internal fun Project.configureAndroidSdkVersion(extension: LibraryExtension) =
     extension.apply {
         compileSdk =
-            configLibs
+            libs
                 .findVersion("android-compileSdk")
                 .get()
                 .requiredVersion
                 .toInt()
         defaultConfig {
             minSdk =
-                configLibs
+                libs
                     .findVersion("android-minSdk")
                     .get()
                     .requiredVersion

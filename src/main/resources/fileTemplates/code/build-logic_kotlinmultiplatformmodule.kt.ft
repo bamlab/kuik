@@ -18,21 +18,21 @@ open class KotlinMultiplatformModule : Plugin<Project> {
     private fun Project.configurePlugins() {
         with(pluginManager) {
             apply(
-                configLibs
+                libs
                     .findPlugin("kotlinMultiplatform")
                     .get()
                     .get()
                     .pluginId,
             )
             apply(
-                configLibs
+                libs
                     .findPlugin("androidLibrary")
                     .get()
                     .get()
                     .pluginId,
             )
             apply(
-                configLibs
+                libs
                     .findPlugin("kotlinter")
                     .get()
                     .get()
