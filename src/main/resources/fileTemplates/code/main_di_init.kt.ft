@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.${COMPOSE_NAME}.di
+package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di
 
 import org.koin.dsl.koinApplication
 

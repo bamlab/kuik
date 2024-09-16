@@ -51,32 +51,32 @@ class CommonGenerator(
 
         //Common
         +GeneratorTemplateFile(
-            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/App.kt",
+            "${params.composeNameLowerCase()}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeNameLowerCase()}/App.kt",
             ftManager.getCodeTemplate(TemplateGroup.COMMON_APP)
         )
 
         +GeneratorTemplateFile(
-            "${params.composeName}/src/commonMain/composeResources/drawable/compose-multiplatform.xml",
+            "${params.composeNameLowerCase()}/src/commonMain/composeResources/drawable/compose-multiplatform.xml",
             ftManager.getCodeTemplate(TemplateGroup.COMMON_COMPOSE_RESOURCES_MULTIPLATFORM_XML)
         )
 
         +GeneratorTemplateFile(
-            "${params.composeName}/build.gradle.kts",
+            "${params.composeNameLowerCase()}/build.gradle.kts",
             ftManager.getCodeTemplate(TemplateGroup.COMPOSE_GRADLE_KTS)
         )
 
         +GeneratorTemplateFile(
-            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/di/appModule.kt",
+            "${params.composeNameLowerCase()}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeNameLowerCase()}/di/appModule.kt",
             ftManager.getCodeTemplate(TemplateGroup.MAIN_DI_MODULE)
         )
 
         +GeneratorTemplateFile(
-            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/di/initKoin.kt",
+            "${params.composeNameLowerCase()}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeNameLowerCase()}/di/initKoin.kt",
             ftManager.getCodeTemplate(TemplateGroup.MAIN_DI_INIT)
         )
         +GeneratorTemplateFile(
-            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/loggin/initLogger.kt",
-            ftManager.getCodeTemplate(TemplateGroup.MAIN_DI_INIT)
+            "${params.composeNameLowerCase()}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeNameLowerCase()}/logging/initLogger.kt",
+            ftManager.getCodeTemplate(TemplateGroup.MAIN_LOGGER_INIT)
         )
 
         addAll(generatorList.flatMap { it.commonFiles(ftManager, packageName) })

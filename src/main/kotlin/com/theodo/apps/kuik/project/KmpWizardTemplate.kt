@@ -105,6 +105,7 @@ class KmpWizardTemplate {
             "PACKAGE_NAME" to packageName,
             "SHARED_NAME" to model.moduleLowerCase,
             "COMPOSE_NAME" to model.composeName,
+            "COMPOSE_NAME_LOWERCASE" to model.composeNameLowerCase(),
             "SERVER_NAME" to model.serverName,
             "MODULE_NAME" to moduleData.name,
             "SERVER_GREETING" to "\${Greeting().greet()}",

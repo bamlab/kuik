@@ -19,15 +19,15 @@ class AndroidGenerator(
         if (isProject) {
             listOf(
                 GeneratorTemplateFile(
-                    "${params.composeName}/src/androidMain/kotlin/${packageName.toFolders()}/${params.composeName}/MainActivity.kt",
+                    "${params.composeNameLowerCase()}/src/androidMain/kotlin/${packageName.toFolders()}/${params.composeNameLowerCase()}/MainActivity.kt",
                     ftManager.getCodeTemplate(TemplateGroup.ANDROID_MAINACTIVITY),
                 ),
                 GeneratorTemplateFile(
-                    "${params.composeName}/src/androidMain/AndroidManifest.xml",
+                    "${params.composeNameLowerCase()}/src/androidMain/AndroidManifest.xml",
                     ftManager.getCodeTemplate(TemplateGroup.ANDROID_MANIFEST),
                 ),
                 GeneratorTemplateFile(
-                    "${params.composeName}/src/androidMain/res/values/strings.xml",
+                    "${params.composeNameLowerCase()}/src/androidMain/res/values/strings.xml",
                     ftManager.getCodeTemplate(TemplateGroup.ANDROID_VALUES_XML),
                 ),
             )

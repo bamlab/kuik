@@ -1,6 +1,6 @@
-package ${PACKAGE_NAME}.${COMPOSE_NAME}.di
+package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di
 
-import ${PACKAGE_NAME}.${COMPOSE_NAME}.logging.initLogger
+import ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.logging.initLogger
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

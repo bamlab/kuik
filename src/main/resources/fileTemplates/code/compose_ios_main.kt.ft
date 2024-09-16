@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.${COMPOSE_NAME}
+package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}
 
 import androidx.compose.ui.window.ComposeUIViewController
 

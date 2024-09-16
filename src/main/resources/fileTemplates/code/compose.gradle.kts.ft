@@ -138,7 +138,7 @@ android {
 <#if HAS_DESKTOP>
 compose.desktop {
     application {
-        mainClass = "${PACKAGE_NAME}.${COMPOSE_NAME}.MainKt"
+        mainClass = "${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)

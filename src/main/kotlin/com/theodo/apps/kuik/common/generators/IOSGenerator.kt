@@ -13,7 +13,7 @@ class IOSGenerator(params: KmpModuleModel, private val isProject: Boolean) : Pla
         return if (isProject) {
             listOf(
                 GeneratorTemplateFile(
-                    "${params.composeName}/src/iosMain/kotlin/${packageName.toFolders()}/${params.composeName}/MainViewController.kt",
+                    "${params.composeNameLowerCase()}/src/iosMain/kotlin/${packageName.toFolders()}/${params.composeNameLowerCase()}/MainViewController.kt",
                     ftManager.getCodeTemplate(TemplateGroup.COMPOSE_IOS_MAIN)
                 ),
                 GeneratorEmptyDirectory("iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/configuration"),

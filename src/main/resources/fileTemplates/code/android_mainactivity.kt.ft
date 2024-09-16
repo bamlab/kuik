@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.${COMPOSE_NAME}
+package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

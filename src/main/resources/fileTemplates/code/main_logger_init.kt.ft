@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.${COMPOSE_NAME}.logging
+package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.logging
 
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier

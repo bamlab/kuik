@@ -323,7 +323,7 @@ objects = {
 												ENABLE_PREVIEWS = YES;
 												FRAMEWORK_SEARCH_PATHS = (
 												"$(inherited)",
-												"$(SRCROOT)/../${SHARED_NAME}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../${COMPOSE_NAME}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+												"$(SRCROOT)/../${SHARED_NAME}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../${COMPOSE_NAME_LOWERCASE}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 												);
 												INFOPLIST_FILE = iosApp/Info.plist;
 												IPHONEOS_DEPLOYMENT_TARGET = 15.3;
@@ -355,7 +355,7 @@ objects = {
 												ENABLE_PREVIEWS = YES;
 												FRAMEWORK_SEARCH_PATHS = (
 												"$(inherited)",
-												"$(SRCROOT)/../${SHARED_NAME}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../${COMPOSE_NAME}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+												"$(SRCROOT)/../${SHARED_NAME}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../${COMPOSE_NAME_LOWERCASE}/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 												);
 												INFOPLIST_FILE = iosApp/Info.plist;
 												IPHONEOS_DEPLOYMENT_TARGET = 15.3;

@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.${COMPOSE_NAME}
+package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -10,9 +10,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import ${PACKAGE_NAME}.${COMPOSE_NAME}.composeApp.di.initKoin
-import myapplication.${COMPOSE_NAME}.generated.resources.Res
-import myapplication.${COMPOSE_NAME}.generated.resources.compose_multiplatform
+import ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di.initKoin
+import ${APP_NAME_LOWERCASE}.${COMPOSE_NAME_LOWERCASE}.generated.resources.Res
+import ${APP_NAME_LOWERCASE}.${COMPOSE_NAME_LOWERCASE}.generated.resources.compose_multiplatform
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication

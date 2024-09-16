@@ -14,10 +14,11 @@ class KmpModuleModel : WizardModel() {
 
     var packageName by mutableStateOf("com.example")
     var moduleLowerCase by mutableStateOf("shared")
-    var composeName by mutableStateOf("composeApp")
+    var composeName by mutableStateOf("ComposeApp")
     var serverName by mutableStateOf("server")
     var moduleName by mutableStateOf("")
 
+    fun composeNameLowerCase() = composeName.lowercase()
     override fun handleFinished() {
 
     }
