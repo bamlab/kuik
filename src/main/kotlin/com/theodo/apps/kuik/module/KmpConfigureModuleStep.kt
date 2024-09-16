@@ -29,7 +29,7 @@ class KmpConfigureModuleStep(
     override fun onProceeding() {
         super.onProceeding()
         model.moduleName = panel.getModuleName()
-        model.packageName = panel.getPackageName().substringBeforeLast(".")
+        model.packageName = panel.getPackageName().substringBeforeLast(".") + ".${model.moduleType.name.lowercase()}"
         model.moduleLowerCase = panel.getPackageName().substringAfterLast(".")
         model.hasAndroid = panel.isIncludeAndroid()
         model.hasIOS = panel.isIncludeIos()

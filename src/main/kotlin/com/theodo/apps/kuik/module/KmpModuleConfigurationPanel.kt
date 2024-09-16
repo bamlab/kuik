@@ -157,7 +157,8 @@ class KmpModuleConfigurationPanel : JPanel() {
     private fun updatePackageName() {
         val moduleName = moduleNameField.text.trim().lowercase()
         val packageName = packageNameField.text.trim().lowercase()
-        completePackageNameField.text = "$packageName.$moduleName"
+        val moduleType = getModuleType().name.lowercase()
+        completePackageNameField.text = "$packageName.$moduleType.$moduleName"
     }
 
     fun getPackageName(): String = completePackageNameField.text.trim()

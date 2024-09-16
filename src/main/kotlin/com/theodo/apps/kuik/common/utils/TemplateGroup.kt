@@ -6,7 +6,7 @@ object TemplateGroup {
     const val ANDROID_MAINACTIVITY = "android_mainactivity.kt"
     const val ANDROID_MANIFEST = "android_manifest.xml"
     const val COMMON_APP = "common_app.kt"
-    const val COMMON_BUILD = "common_build.gradle.kts"
+    const val MODULE_FEATURE_BUILD = "module_feature_build.gradle.kts"
     const val COMMON_PLATFORM = "common_platform.kt"
     const val DEFAULT_PLATFORM = "default_platform.kt"
     const val JVM_PLATFORM = "jvm_platform.kt"
