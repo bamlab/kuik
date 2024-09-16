@@ -10,6 +10,7 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.file.findBlock
 import com.theodo.apps.kuik.common.utils.file.findDependencyInsertionPoint
+import com.theodo.apps.kuik.module.model.ModuleType
 import java.io.IOException
 import javax.swing.JComponent
 
@@ -54,6 +55,9 @@ class KmpConfigureModuleStep(
                 val moduleDir = createDirectory(baseDir, model.moduleName)
                 KmpModuleRecipe().executeRecipe(project, model, moduleDir)
                 addModuleToSettingsGradle(project, model.moduleName)
+                if (model.moduleType == ModuleType.FEATURE) {
+                    addModuleDependencyToMainApp(project, model.moduleName)
+                }
                 addModuleDependencyToMainApp(project, model.moduleName)
             } catch (e: IOException) {
                 e.printStackTrace()

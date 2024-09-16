@@ -3,12 +3,11 @@ package com.theodo.apps.kuik.module.generators
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorEmptyDirectory
-import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.generators.*
 import com.theodo.apps.kuik.common.models.KmpModuleModel
-import com.theodo.apps.kuik.common.utils.TemplateGroup
 
 open class ModuleCommonGenerator(
+    // TODO move abstract when all type developed
     private val params: KmpModuleModel,
 ) {
     open fun generate(
@@ -26,10 +25,6 @@ open class ModuleCommonGenerator(
 
         // Common
         +GeneratorEmptyDirectory("src/commonMain/kotlin/${packageName.replace(".", "/")}/${params.moduleLowerCase}")
-        +GeneratorTemplateFile(
-            "build.gradle.kts",
-            ftManager.getCodeTemplate(TemplateGroup.MODULE_FEATURE_BUILD),
-        )
 
         addAll(generatorList.flatMap { it.commonFiles(ftManager, packageName) })
         addAll(generatorList.flatMap { it.generate(ftManager, packageName) })
