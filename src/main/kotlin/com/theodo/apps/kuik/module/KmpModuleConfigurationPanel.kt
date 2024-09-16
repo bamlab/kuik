@@ -23,6 +23,13 @@ class KmpModuleConfigurationPanel : JPanel() {
     private val includeJvmCheckBox: JCheckBox = JCheckBox("Include JVM")
     private val includeWebCheckBox: JCheckBox = JCheckBox("Include Web")
 
+    // Radio buttons for module type
+    private val featureRadioButton: JRadioButton = JRadioButton("Feature")
+    private val coreRadioButton: JRadioButton = JRadioButton("Core")
+    private val domainRadioButton: JRadioButton = JRadioButton("Domain")
+    private val dataRadioButton: JRadioButton = JRadioButton("Data")
+    private val moduleTypeGroup: ButtonGroup = ButtonGroup()
+
     init {
 
         includeAndroidCheckBox.isSelected = true
@@ -60,6 +67,12 @@ class KmpModuleConfigurationPanel : JPanel() {
             }
         })
 
+        // Add radio buttons to the group
+        moduleTypeGroup.add(featureRadioButton)
+        moduleTypeGroup.add(coreRadioButton)
+        moduleTypeGroup.add(domainRadioButton)
+        moduleTypeGroup.add(dataRadioButton)
+
         layout = GridBagLayout()
         val gbc = GridBagConstraints().apply {
             insets = JBUI.insets(5, 0)
@@ -95,9 +108,30 @@ class KmpModuleConfigurationPanel : JPanel() {
         gbc.gridwidth = 2
         add(completePackageNameField, gbc)
 
+        // Radio Buttons for Module Type
+        gbc.gridx = 0
+        gbc.gridy = 4
+        gbc.gridwidth = 1
+        add(JLabel("Module Type:"), gbc)
+        gbc.gridx = 1
+        gbc.gridy = 4
+        gbc.gridwidth = 1
+        add(featureRadioButton, gbc)
+        gbc.gridx = 1
+        gbc.gridy = 5
+        gbc.gridwidth = 1
+        add(coreRadioButton, gbc)
+        gbc.gridx = 1
+        gbc.gridy = 6
+        gbc.gridwidth = 1
+        add(domainRadioButton, gbc)
+        gbc.gridx = 1
+        gbc.gridy = 7
+        gbc.gridwidth = 1
+        add(dataRadioButton, gbc)
 
         gbc.gridx = 0
-        gbc.gridy = 5
+        gbc.gridy = 8
         gbc.weighty = 1.0
         add(Box.createVerticalGlue(), gbc)
 
@@ -107,7 +141,7 @@ class KmpModuleConfigurationPanel : JPanel() {
     private fun validateModuleName() {
         val moduleName = moduleNameField.text.trim()
         if (moduleName.isEmpty()) {
-            moduleNameErrorLabel.text = "Please a enter a valid module name"
+            moduleNameErrorLabel.text = "Please enter a valid module name"
             moduleNameErrorLabel.isVisible = true
         } else {
             moduleNameErrorLabel.isVisible = false
