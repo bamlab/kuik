@@ -5,4 +5,7 @@ enum class ModuleType {
     CORE,
     DOMAIN,
     DATA,
+    ;
+
+    fun folderName() = this.name.lowercase()
 }

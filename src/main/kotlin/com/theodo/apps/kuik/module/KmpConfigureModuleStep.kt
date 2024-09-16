@@ -30,7 +30,7 @@ class KmpConfigureModuleStep(
     override fun onProceeding() {
         super.onProceeding()
         model.moduleName = panel.getModuleName()
-        model.packageName = panel.getPackageName().substringBeforeLast(".") + ".${model.moduleType.name.lowercase()}"
+        model.packageName = panel.getPackageName().substringBeforeLast(".")
         model.moduleLowerCase = panel.getPackageName().substringAfterLast(".")
         model.hasAndroid = panel.isIncludeAndroid()
         model.hasIOS = panel.isIncludeIos()
@@ -52,13 +52,17 @@ class KmpConfigureModuleStep(
         WriteCommandAction.runWriteCommandAction(project) {
             try {
                 val baseDir = project.guessProjectDir() ?: return@runWriteCommandAction
-                val moduleDir = createDirectory(baseDir, model.moduleName)
+                println("DBO - baseDir: $baseDir")
+                println("DBO - type: ${model.moduleType.folderName()}")
+                val moduleTypeDir =
+                    baseDir.children.find { it.name == model.moduleType.folderName() } ?: return@runWriteCommandAction
+                println("DBO - type dir" + moduleTypeDir.name)
+                val moduleDir = createDirectory(moduleTypeDir, model.moduleName)
                 KmpModuleRecipe().executeRecipe(project, model, moduleDir)
-                addModuleToSettingsGradle(project, model.moduleName)
+                addModuleToSettingsGradle(project, model.moduleName, model.moduleType)
                 if (model.moduleType == ModuleType.FEATURE) {
                     addModuleDependencyToMainApp(project, model.moduleName)
                 }
-                addModuleDependencyToMainApp(project, model.moduleName)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -91,6 +95,7 @@ class KmpConfigureModuleStep(
     private fun addModuleToSettingsGradle(
         project: Project,
         moduleName: String,
+        moduleType: ModuleType,
     ) {
         val settingsFile = project.guessProjectDir()?.findFileByRelativePath("settings.gradle.kts")
         if (settingsFile != null) {
@@ -98,7 +103,7 @@ class KmpConfigureModuleStep(
                 try {
                     val document = FileDocumentManager.getInstance().getDocument(settingsFile)
                     if (document != null) {
-                        val newModuleEntry = "include(\":$moduleName\")"
+                        val newModuleEntry = "include(\":${moduleType.folderName()}:$moduleName\")"
                         if (!document.text.contains(newModuleEntry)) {
                             document.insertString(document.textLength, "\n$newModuleEntry")
                         }

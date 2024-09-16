@@ -3,6 +3,7 @@ package com.theodo.apps.kuik.module
 import com.intellij.util.ui.JBUI
 import com.theodo.apps.kuik.module.model.ModuleType
 import java.awt.*
+import java.awt.event.ActionListener
 import javax.swing.*
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
@@ -75,6 +76,12 @@ class KmpModuleConfigurationPanel : JPanel() {
         moduleTypeGroup.add(coreRadioButton)
         moduleTypeGroup.add(domainRadioButton)
         moduleTypeGroup.add(dataRadioButton)
+        moduleTypeGroup.setSelected(featureRadioButton.model, true)
+        val moduleTypeListener = ActionListener { updatePackageName() }
+        featureRadioButton.addActionListener(moduleTypeListener)
+        coreRadioButton.addActionListener(moduleTypeListener)
+        domainRadioButton.addActionListener(moduleTypeListener)
+        dataRadioButton.addActionListener(moduleTypeListener)
 
         layout = GridBagLayout()
         val gbc =
@@ -157,7 +164,7 @@ class KmpModuleConfigurationPanel : JPanel() {
     private fun updatePackageName() {
         val moduleName = moduleNameField.text.trim().lowercase()
         val packageName = packageNameField.text.trim().lowercase()
-        val moduleType = getModuleType().name.lowercase()
+        val moduleType = getModuleType().folderName()
         completePackageNameField.text = "$packageName.$moduleType.$moduleName"
     }
 
