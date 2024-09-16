@@ -100,7 +100,8 @@ abstract class ModuleCommonGenerator(
                 val adjustedInsertionPoint: Int = kotlinBlockMatch.startIndex + insertionPoint
 
                 // Insert the dependency line at the found position
-                val newModuleEntry = "implementation(project(\":${params.moduleType}:${params.moduleName}\"))"
+                val newModuleEntry =
+                    "implementation(project(\":${params.moduleType.folderName()}:${params.moduleName}\"))"
                 if (!document.text.contains(newModuleEntry)) {
                     document.insertString(adjustedInsertionPoint, "$newModuleEntry\n")
                 }
