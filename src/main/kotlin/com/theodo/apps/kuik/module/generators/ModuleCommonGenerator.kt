@@ -6,8 +6,7 @@ import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.theodo.apps.kuik.common.generators.*
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 
-open class ModuleCommonGenerator(
-    // TODO move abstract when all type developed
+abstract class ModuleCommonGenerator(
     private val params: KmpModuleModel,
 ) {
     open fun generate(
