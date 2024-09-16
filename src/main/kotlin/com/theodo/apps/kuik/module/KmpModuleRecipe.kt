@@ -10,6 +10,7 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.models.*
 import com.theodo.apps.kuik.common.utils.Utils
 import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
+import com.theodo.apps.kuik.module.model.ModuleType
 
 class KmpModuleRecipe {
     fun executeRecipe(
@@ -37,8 +38,15 @@ class KmpModuleRecipe {
             )
 
         val generatorAssets = mutableListOf<GeneratorAsset>()
-        val moduleCommonList =
-            ModuleGeneratorFactory.generate(model).generate(generatorAssets, ftManager, model.packageName)
+        val moduleGenerator = ModuleGeneratorFactory.generate(model)
+        // 1 - Add module to settings.gradle.kts
+        moduleGenerator.addModuleToSettingsGradle(project, model.moduleName, model.moduleType)
+        // 2 - add Module dep to main app
+        if (model.moduleType == ModuleType.FEATURE) {
+            moduleGenerator.addModuleDependencyToMainApp(project, model)
+        }
+        // 3 - Generate module files
+        val moduleCommonList = moduleGenerator.generate(generatorAssets, ftManager, model.packageName)
         generatorAssets.addAll(moduleCommonList)
         generatorAssets.forEach { asset ->
             when (asset) {
