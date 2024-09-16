@@ -2,6 +2,7 @@ package com.theodo.apps.kuik.module
 
 import com.intellij.ui.JBColor
 import com.intellij.util.ui.JBUI
+import com.theodo.apps.kuik.module.model.ModuleType
 import java.awt.*
 import javax.swing.*
 import javax.swing.event.DocumentEvent
@@ -163,4 +164,13 @@ class KmpModuleConfigurationPanel : JPanel() {
     fun isIncludeWeb(): Boolean = includeWebCheckBox.isSelected
     fun isIncludeDesktop(): Boolean = includeJvmCheckBox.isSelected
     fun isIncludeServer(): Boolean = includeJvmCheckBox.isSelected
+    fun getModuleType(): ModuleType {
+        return when {
+            featureRadioButton.isSelected -> ModuleType.FEATURE
+            coreRadioButton.isSelected -> ModuleType.CORE
+            domainRadioButton.isSelected -> ModuleType.DOMAIN
+            dataRadioButton.isSelected -> ModuleType.DATA
+            else -> ModuleType.FEATURE
+        }
+    }
 }

@@ -37,6 +37,7 @@ class KmpConfigureModuleStep(
         model.hasWeb = panel.isIncludeWeb()
         model.hasDesktop = panel.isIncludeDesktop()
         model.hasServer = panel.isIncludeServer()
+        model.moduleType = panel.getModuleType()
     }
 
     override fun onWizardFinished() {

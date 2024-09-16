@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.android.tools.idea.wizard.model.WizardModel
+import com.theodo.apps.kuik.module.model.ModuleType
 
 class KmpModuleModel : WizardModel() {
     var hasAndroid: Boolean by mutableStateOf(false)
@@ -17,6 +18,7 @@ class KmpModuleModel : WizardModel() {
     var composeName by mutableStateOf("ComposeApp")
     var serverName by mutableStateOf("server")
     var moduleName by mutableStateOf("")
+    var moduleType by mutableStateOf(ModuleType.FEATURE)
 
     fun composeNameLowerCase() = composeName.lowercase()
     override fun handleFinished() {
