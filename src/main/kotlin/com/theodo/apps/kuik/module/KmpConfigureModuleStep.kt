@@ -52,11 +52,8 @@ class KmpConfigureModuleStep(
         WriteCommandAction.runWriteCommandAction(project) {
             try {
                 val baseDir = project.guessProjectDir() ?: return@runWriteCommandAction
-                println("DBO - baseDir: $baseDir")
-                println("DBO - type: ${model.moduleType.folderName()}")
                 val moduleTypeDir =
-                    baseDir.children.find { it.name == model.moduleType.folderName() } ?: return@runWriteCommandAction
-                println("DBO - type dir" + moduleTypeDir.name)
+                    baseDir.findFileByRelativePath(model.moduleType.folderName()) ?: return@runWriteCommandAction
                 val moduleDir = createDirectory(moduleTypeDir, model.moduleName)
                 KmpModuleRecipe().executeRecipe(project, model, moduleDir)
                 addModuleToSettingsGradle(project, model.moduleName, model.moduleType)
@@ -75,7 +72,7 @@ class KmpConfigureModuleStep(
     ) {
         // TODO can find the main app in another module than composeApp
         val buildFile =
-            project.guessProjectDir()?.findFileByRelativePath("composeApp")?.findFileByRelativePath("build.gradle.kts")
+            project.guessProjectDir()?.findFileByRelativePath("composeapp")?.findFileByRelativePath("build.gradle.kts")
         if (buildFile != null) {
             WriteCommandAction.runWriteCommandAction(project) {
                 try {
@@ -137,7 +134,7 @@ class KmpConfigureModuleStep(
                 val adjustedInsertionPoint: Int = kotlinBlockMatch.startIndex + insertionPoint
 
                 // Insert the dependency line at the found position
-                val newModuleEntry = "implementation(project(\":$moduleName\"))"
+                val newModuleEntry = "implementation(project(\":feature:$moduleName\"))"
                 if (!document.text.contains(newModuleEntry)) {
                     document.insertString(adjustedInsertionPoint, "$newModuleEntry\n")
                 }
