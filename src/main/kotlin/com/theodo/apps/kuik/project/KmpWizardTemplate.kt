@@ -91,7 +91,7 @@ class KmpWizardTemplate {
         val (projectData, _, _) = moduleData
 
         val model = KmpModuleModel()
-        val packageName = PACKAGE_NAME
+        val packageName = moduleData.packageName
 
         model.hasAndroid = includeAndroid
         model.hasWeb = includeWeb
