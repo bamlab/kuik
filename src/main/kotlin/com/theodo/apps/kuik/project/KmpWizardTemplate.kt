@@ -23,7 +23,7 @@ class KmpWizardTemplate {
                 "Creates a new Kotlin Multiplatform project that include iOS and Android with theodo standards"
             minApi = 26
             category = Category.Application
-            formFactor = FormFactor.Mobile
+            formFactor = FormFactor.Generic
             screens = listOf(
                 WizardUiContext.NewProject,
             )
