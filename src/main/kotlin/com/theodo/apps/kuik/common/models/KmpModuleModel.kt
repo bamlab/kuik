@@ -19,6 +19,7 @@ class KmpModuleModel : WizardModel() {
     var serverName by mutableStateOf("server")
     var moduleName by mutableStateOf("")
     var moduleType by mutableStateOf(ModuleType.FEATURE)
+    var shouldAddModuleDependencyToMainApp by mutableStateOf(false)
 
     fun composeNameLowerCase() = composeName.lowercase()
 

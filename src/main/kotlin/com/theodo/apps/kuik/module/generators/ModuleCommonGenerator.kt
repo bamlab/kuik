@@ -64,10 +64,7 @@ abstract class ModuleCommonGenerator(
         }
     }
 
-    fun addModuleDependencyToMainApp(
-        project: Project,
-        module: KmpModuleModel,
-    ) {
+    fun addModuleDependencyToMainApp(project: Project) {
         // TODO can find the main app in another module than composeApp
         val buildFile =
             project.guessProjectDir()?.findFileByRelativePath("composeapp")?.findFileByRelativePath("build.gradle.kts")
@@ -76,7 +73,7 @@ abstract class ModuleCommonGenerator(
                 try {
                     val document = FileDocumentManager.getInstance().getDocument(buildFile)
                     if (document != null) {
-                        reallyWrite(document, module)
+                        reallyWrite(document)
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -87,10 +84,7 @@ abstract class ModuleCommonGenerator(
         }
     }
 
-    private fun reallyWrite(
-        document: Document,
-        module: KmpModuleModel,
-    ) {
+    private fun reallyWrite(document: Document) {
         val content = document.text
 
         // Find the full kotlin { } block
@@ -106,7 +100,7 @@ abstract class ModuleCommonGenerator(
                 val adjustedInsertionPoint: Int = kotlinBlockMatch.startIndex + insertionPoint
 
                 // Insert the dependency line at the found position
-                val newModuleEntry = "implementation(project(\":${module.moduleType}:${module.moduleName}\"))"
+                val newModuleEntry = "implementation(project(\":${params.moduleType}:${params.moduleName}\"))"
                 if (!document.text.contains(newModuleEntry)) {
                     document.insertString(adjustedInsertionPoint, "$newModuleEntry\n")
                 }
@@ -118,4 +112,6 @@ abstract class ModuleCommonGenerator(
             println("Error: Could not find the 'kotlin { }' block.")
         }
     }
+
+    open fun shouldAddModuleDependencyToMainApp(): Boolean = params.shouldAddModuleDependencyToMainApp
 }

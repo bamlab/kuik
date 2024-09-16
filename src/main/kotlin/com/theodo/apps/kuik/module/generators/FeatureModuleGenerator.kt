@@ -22,4 +22,6 @@ class FeatureModuleGenerator(
                 ftManager.getCodeTemplate(TemplateGroup.MODULE_FEATURE_BUILD),
             )
         }
+
+    override fun shouldAddModuleDependencyToMainApp(): Boolean = true
 }
