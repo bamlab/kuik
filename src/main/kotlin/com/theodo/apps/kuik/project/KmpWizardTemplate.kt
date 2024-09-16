@@ -11,7 +11,9 @@ import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.generators.CommonGenerator
 import com.theodo.apps.kuik.common.models.*
+import com.theodo.apps.kuik.common.utils.TemplateGroup
 import com.theodo.apps.kuik.common.utils.Utils
+import com.theodo.apps.kuik.common.utils.toFolders
 import com.theodo.apps.kuik.module.KmpModuleRecipe
 import com.theodo.apps.kuik.module.model.ModuleType
 import org.jetbrains.kotlin.idea.core.util.toVirtualFile
@@ -186,6 +188,13 @@ class KmpWizardTemplate {
                 project = project,
                 model = model,
                 moduleDir = dir,
+                additionalAssets =
+                    listOf(
+                        GeneratorTemplateFile(
+                            "src/commonMain/kotlin/${model.packageName.toFolders()}/${model.moduleLowerCase}/MainDestination.kt",
+                            FileTemplateManager.getDefaultInstance().getCodeTemplate(TemplateGroup.NAVIGATION_DESTINATIONS),
+                        ),
+                    ),
             )
         }
     }

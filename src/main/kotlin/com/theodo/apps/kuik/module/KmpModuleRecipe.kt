@@ -16,6 +16,7 @@ class KmpModuleRecipe {
         project: Project,
         model: KmpModuleModel,
         moduleDir: VirtualFile,
+        additionalAssets: List<GeneratorAsset> = emptyList(),
     ) {
         val ftManager = FileTemplateManager.getInstance(project)
         val templateData =
@@ -47,6 +48,10 @@ class KmpModuleRecipe {
         // 3 - Generate module files
         val moduleCommonList = moduleGenerator.generate(generatorAssets, ftManager, model.packageName)
         generatorAssets.addAll(moduleCommonList)
+        // 4 - Add additional assets
+        generatorAssets.addAll(additionalAssets)
+
+        // Finally generate assets
         generatorAssets.forEach { asset ->
             when (asset) {
                 is GeneratorEmptyDirectory -> createEmptyDirectory(moduleDir, asset.relativePath)
