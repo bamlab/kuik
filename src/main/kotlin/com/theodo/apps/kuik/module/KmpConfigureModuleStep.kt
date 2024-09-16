@@ -15,9 +15,8 @@ import javax.swing.JComponent
 
 class KmpConfigureModuleStep(
     private val project: Project,
-    private val model: KmpModuleModel
+    private val model: KmpModuleModel,
 ) : SkippableWizardStep<KmpModuleModel>(model, "KMM Module Configuration") {
-
     private lateinit var panel: KmpModuleConfigurationPanel
 
     override fun getComponent(): JComponent {
@@ -45,7 +44,10 @@ class KmpConfigureModuleStep(
         createKmmModule(project, model)
     }
 
-    private fun createKmmModule(project: Project, model: KmpModuleModel) {
+    private fun createKmmModule(
+        project: Project,
+        model: KmpModuleModel,
+    ) {
         WriteCommandAction.runWriteCommandAction(project) {
             try {
                 val baseDir = project.guessProjectDir() ?: return@runWriteCommandAction
@@ -59,7 +61,10 @@ class KmpConfigureModuleStep(
         }
     }
 
-    private fun addModuleDependencyToMainApp(project: Project, moduleName: String) {
+    private fun addModuleDependencyToMainApp(
+        project: Project,
+        moduleName: String,
+    ) {
         // TODO can find the main app in another module than composeApp
         val buildFile =
             project.guessProjectDir()?.findFileByRelativePath("composeApp")?.findFileByRelativePath("build.gradle.kts")
@@ -79,7 +84,10 @@ class KmpConfigureModuleStep(
         }
     }
 
-    private fun addModuleToSettingsGradle(project: Project, moduleName: String) {
+    private fun addModuleToSettingsGradle(
+        project: Project,
+        moduleName: String,
+    ) {
         val settingsFile = project.guessProjectDir()?.findFileByRelativePath("settings.gradle.kts")
         if (settingsFile != null) {
             WriteCommandAction.runWriteCommandAction(project) {
@@ -101,7 +109,10 @@ class KmpConfigureModuleStep(
         }
     }
 
-    private fun reallyWrite(document: Document, moduleName: String) {
+    private fun reallyWrite(
+        document: Document,
+        moduleName: String,
+    ) {
         val content = document.text
 
         // Find the full kotlin { } block
@@ -130,8 +141,8 @@ class KmpConfigureModuleStep(
         }
     }
 
-
-    private fun createDirectory(parent: VirtualFile, name: String): VirtualFile {
-        return parent.createChildDirectory(null, name)
-    }
+    private fun createDirectory(
+        parent: VirtualFile,
+        name: String,
+    ): VirtualFile = parent.createChildDirectory(null, name)
 }

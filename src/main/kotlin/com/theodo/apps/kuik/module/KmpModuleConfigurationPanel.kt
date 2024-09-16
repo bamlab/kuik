@@ -1,6 +1,5 @@
 package com.theodo.apps.kuik.module
 
-import com.intellij.ui.JBColor
 import com.intellij.util.ui.JBUI
 import com.theodo.apps.kuik.module.model.ModuleType
 import java.awt.*
@@ -9,7 +8,6 @@ import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 
 class KmpModuleConfigurationPanel : JPanel() {
-
     private val defaultPackage = "com.example"
     private val packageNameLabel: JLabel = JLabel("Package Name:")
     private val packageNameField: JTextField = JTextField(15)
@@ -40,33 +38,37 @@ class KmpModuleConfigurationPanel : JPanel() {
         packageNameField.text = defaultPackage
         updatePackageName()
 
-        moduleNameField.document.addDocumentListener(object : DocumentListener {
-            override fun insertUpdate(e: DocumentEvent?) {
-                validateModuleName()
-            }
+        moduleNameField.document.addDocumentListener(
+            object : DocumentListener {
+                override fun insertUpdate(e: DocumentEvent?) {
+                    validateModuleName()
+                }
 
-            override fun removeUpdate(e: DocumentEvent?) {
-                validateModuleName()
-            }
+                override fun removeUpdate(e: DocumentEvent?) {
+                    validateModuleName()
+                }
 
-            override fun changedUpdate(e: DocumentEvent?) {
-                validateModuleName()
-            }
-        })
+                override fun changedUpdate(e: DocumentEvent?) {
+                    validateModuleName()
+                }
+            },
+        )
 
-        packageNameField.document.addDocumentListener(object : DocumentListener {
-            override fun insertUpdate(e: DocumentEvent?) {
-                updatePackageName()
-            }
+        packageNameField.document.addDocumentListener(
+            object : DocumentListener {
+                override fun insertUpdate(e: DocumentEvent?) {
+                    updatePackageName()
+                }
 
-            override fun removeUpdate(e: DocumentEvent?) {
-                updatePackageName()
-            }
+                override fun removeUpdate(e: DocumentEvent?) {
+                    updatePackageName()
+                }
 
-            override fun changedUpdate(e: DocumentEvent?) {
-                updatePackageName()
-            }
-        })
+                override fun changedUpdate(e: DocumentEvent?) {
+                    updatePackageName()
+                }
+            },
+        )
 
         // Add radio buttons to the group
         moduleTypeGroup.add(featureRadioButton)
@@ -75,11 +77,12 @@ class KmpModuleConfigurationPanel : JPanel() {
         moduleTypeGroup.add(dataRadioButton)
 
         layout = GridBagLayout()
-        val gbc = GridBagConstraints().apply {
-            insets = JBUI.insets(5, 0)
-            fill = GridBagConstraints.HORIZONTAL
-            anchor = GridBagConstraints.NORTH
-        }
+        val gbc =
+            GridBagConstraints().apply {
+                insets = JBUI.insets(5, 0)
+                fill = GridBagConstraints.HORIZONTAL
+                anchor = GridBagConstraints.NORTH
+            }
 
         // Module Name
         gbc.gridx = 0
@@ -158,19 +161,25 @@ class KmpModuleConfigurationPanel : JPanel() {
     }
 
     fun getPackageName(): String = completePackageNameField.text.trim()
+
     fun getModuleName(): String = moduleNameField.text.trim()
+
     fun isIncludeAndroid(): Boolean = includeAndroidCheckBox.isSelected
+
     fun isIncludeIos(): Boolean = includeIosCheckBox.isSelected
+
     fun isIncludeWeb(): Boolean = includeWebCheckBox.isSelected
+
     fun isIncludeDesktop(): Boolean = includeJvmCheckBox.isSelected
+
     fun isIncludeServer(): Boolean = includeJvmCheckBox.isSelected
-    fun getModuleType(): ModuleType {
-        return when {
+
+    fun getModuleType(): ModuleType =
+        when {
             featureRadioButton.isSelected -> ModuleType.FEATURE
             coreRadioButton.isSelected -> ModuleType.CORE
             domainRadioButton.isSelected -> ModuleType.DOMAIN
             dataRadioButton.isSelected -> ModuleType.DATA
             else -> ModuleType.FEATURE
         }
-    }
 }

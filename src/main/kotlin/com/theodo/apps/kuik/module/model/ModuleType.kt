@@ -4,5 +4,5 @@ enum class ModuleType {
     FEATURE,
     CORE,
     DOMAIN,
-    DATA
+    DATA,
 }

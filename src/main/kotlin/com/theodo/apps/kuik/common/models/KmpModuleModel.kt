@@ -21,13 +21,17 @@ class KmpModuleModel : WizardModel() {
     var moduleType by mutableStateOf(ModuleType.FEATURE)
 
     fun composeNameLowerCase() = composeName.lowercase()
-    override fun handleFinished() {
 
+    override fun handleFinished() {
     }
 }
 
 fun KmpModuleModel.hasAndroid() = "HAS_ANDROID" to hasAndroid
+
 fun KmpModuleModel.hasIOS() = "HAS_IOS" to hasIOS
+
 fun KmpModuleModel.hasWeb() = "HAS_WEB" to hasWeb
+
 fun KmpModuleModel.hasDesktop() = "HAS_DESKTOP" to hasDesktop
+
 fun KmpModuleModel.hasServer() = "HAS_SERVER" to hasServer
