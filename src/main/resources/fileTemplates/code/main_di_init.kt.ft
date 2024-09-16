@@ -1,0 +1,10 @@
+package ${PACKAGE_NAME}.${COMPOSE_NAME}.di
+
+import org.koin.dsl.koinApplication
+
+fun initKoin() =
+    koinApplication {
+        listOf(
+            appModule,
+        )
+    }

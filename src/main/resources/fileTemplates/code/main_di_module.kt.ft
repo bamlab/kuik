@@ -1,0 +1,10 @@
+package ${PACKAGE_NAME}.${COMPOSE_NAME}.di
+
+import ${PACKAGE_NAME}.${COMPOSE_NAME}.logging.initLogger
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
+
+val appModule =
+    module {
+        single(createdAtStart = true, qualifier = named("Logger")) { initLogger() }
+    }

@@ -65,6 +65,20 @@ class CommonGenerator(
             ftManager.getCodeTemplate(TemplateGroup.COMPOSE_GRADLE_KTS)
         )
 
+        +GeneratorTemplateFile(
+            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/di/appModule.kt",
+            ftManager.getCodeTemplate(TemplateGroup.MAIN_DI_MODULE)
+        )
+
+        +GeneratorTemplateFile(
+            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/di/initKoin.kt",
+            ftManager.getCodeTemplate(TemplateGroup.MAIN_DI_INIT)
+        )
+        +GeneratorTemplateFile(
+            "${params.composeName}/src/commonMain/kotlin/${packageName.toFolders()}/${params.composeName}/loggin/initLogger.kt",
+            ftManager.getCodeTemplate(TemplateGroup.MAIN_DI_INIT)
+        )
+
         addAll(generatorList.flatMap { it.commonFiles(ftManager, packageName) })
         addAll(generatorList.flatMap { it.generate(ftManager, packageName) })
     }
