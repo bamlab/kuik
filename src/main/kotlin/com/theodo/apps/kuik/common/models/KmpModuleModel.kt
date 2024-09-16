@@ -7,8 +7,8 @@ import com.android.tools.idea.wizard.model.WizardModel
 import com.theodo.apps.kuik.module.model.ModuleType
 
 class KmpModuleModel : WizardModel() {
-    var hasAndroid: Boolean by mutableStateOf(false)
-    var hasWeb: Boolean by mutableStateOf(false)
+    var hasAndroid: Boolean by mutableStateOf(true)
+    var hasWeb: Boolean by mutableStateOf(true)
     var hasIOS: Boolean by mutableStateOf(false)
     var hasDesktop: Boolean by mutableStateOf(false)
     var hasServer: Boolean by mutableStateOf(false)

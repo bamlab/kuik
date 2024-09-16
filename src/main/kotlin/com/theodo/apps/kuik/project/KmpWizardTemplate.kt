@@ -6,16 +6,11 @@ import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.intellij.openapi.project.ProjectManager
-import com.intellij.openapi.project.guessProjectDir
-import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.generators.CommonGenerator
 import com.theodo.apps.kuik.common.models.*
-import com.theodo.apps.kuik.common.utils.TemplateGroup
 import com.theodo.apps.kuik.common.utils.Utils
-import com.theodo.apps.kuik.common.utils.toFolders
-import com.theodo.apps.kuik.module.KmpModuleRecipe
-import com.theodo.apps.kuik.module.model.ModuleType
+import com.theodo.apps.kuik.project.addon.AddOn
+import com.theodo.apps.kuik.project.addon.NavigationAddOn
 import org.jetbrains.kotlin.idea.core.util.toVirtualFile
 import java.net.URL
 
@@ -91,6 +86,11 @@ class KmpWizardTemplate {
                 }
             }
 
+    val addOns =
+        listOf<AddOn>(
+            NavigationAddOn(),
+        )
+
     private fun projectRecipe(
         moduleData: ModuleTemplateData,
         includeAndroid: Boolean,
@@ -140,6 +140,7 @@ class KmpWizardTemplate {
         val virtualFile = projectData.rootDir.toVirtualFile()
 
         virtualFile?.let { file ->
+            addOns.forEach { it.initialize(model.packageName) }
             val ftManager = FileTemplateManager.getDefaultInstance()
             val generatorAssets = mutableListOf<GeneratorAsset>()
             val commonGeneratorList =
@@ -149,6 +150,7 @@ class KmpWizardTemplate {
                     packageName,
                 )
             generatorAssets.addAll(commonGeneratorList)
+            generatorAssets.addAll(addOns.flatMap { it.getMainProjectFiles() })
             generatorAssets.forEach { asset ->
                 when (asset) {
                     is GeneratorEmptyDirectory -> createEmptyDirectory(file, asset.relativePath)
@@ -164,43 +166,7 @@ class KmpWizardTemplate {
                 }
             }
         }
-
-        generateNavigationModule(model)
-    }
-
-    private fun generateNavigationModule(model: KmpModuleModel) {
-        model.apply {
-            packageName += ".core"
-            moduleName = "navigation"
-            moduleLowerCase = moduleName.lowercase()
-            moduleType = ModuleType.CORE
-            shouldAddModuleDependencyToMainApp = true
-        }
         val project = ProjectManager.getInstance().openProjects.last() // Careful, dangerous
-        val baseDir = project.guessProjectDir() ?: return
-        baseDir.findFileByRelativePath(model.moduleType.folderName())?.let {
-            val dir =
-                createEmptyDirectory(
-                    it,
-                    model.moduleLowerCase,
-                )
-            KmpModuleRecipe().executeRecipe(
-                project = project,
-                model = model,
-                moduleDir = dir,
-                additionalAssets =
-                    listOf(
-                        GeneratorTemplateFile(
-                            "src/commonMain/kotlin/${model.packageName.toFolders()}/${model.moduleLowerCase}/MainDestination.kt",
-                            FileTemplateManager.getDefaultInstance().getCodeTemplate(TemplateGroup.NAVIGATION_DESTINATIONS),
-                        ),
-                    ),
-            )
-        }
+        addOns.forEach { it.generateAddOnModule(project) }
     }
-
-    private fun createEmptyDirectory(
-        parent: VirtualFile,
-        path: String,
-    ) = VfsUtil.createDirectoryIfMissing(parent, path)
 }
