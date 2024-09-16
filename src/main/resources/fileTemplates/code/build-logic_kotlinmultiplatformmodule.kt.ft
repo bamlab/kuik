@@ -13,7 +13,17 @@ open class KotlinMultiplatformModule : Plugin<Project> {
 
             val kmpExtension = extensions.getByType<KotlinMultiplatformExtension>()
             configureKmpTargets(kmpExtension)
+            configureBaseLibs(kmpExtension)
         }
+
+    private fun Project.configureBaseLibs(kmpExtension: KotlinMultiplatformExtension) {
+        kmpExtension
+            .sourceSets
+            .getByName("commonMain")
+            .dependencies {
+                implementation(libs.findLibrary("koin-core").get())
+            }
+    }
 
     private fun Project.configurePlugins() {
         with(pluginManager) {

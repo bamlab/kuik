@@ -23,7 +23,6 @@ class BuildLogicGenerator(
                 "build-logic/settings.gradle.kts",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_SETTINGS),
             ),
-
             // Convention
             GeneratorTemplateFile(
                 "build-logic/convention/build.gradle.kts",
@@ -36,6 +35,18 @@ class BuildLogicGenerator(
             GeneratorTemplateFile(
                 "build-logic/convention/src/main/kotlin/KotlinMultiplatformFeatureModule.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_FEATURE_MODULE),
+            ),
+            GeneratorTemplateFile(
+                "build-logic/convention/src/main/kotlin/KotlinMultiplatformDataModule.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_DATA_MODULE),
+            ),
+            GeneratorTemplateFile(
+                "build-logic/convention/src/main/kotlin/KotlinMultiplatformCoreModule.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_CORE_MODULE),
+            ),
+            GeneratorTemplateFile(
+                "build-logic/convention/src/main/kotlin/KotlinMultiplatformDomainModule.kt",
+                ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KOTLIN_MULTIPLATFORM_DOMAIN_MODULE),
             ),
             GeneratorTemplateFile(
                 "build-logic/convention/src/main/kotlin/KotlinMultiplatformModule.kt",
@@ -53,13 +64,10 @@ class BuildLogicGenerator(
                 "build-logic/convention/src/main/kotlin/KmpTargets.kt",
                 ftManager.getCodeTemplate(TemplateGroup.BUILD_LOGIC_KMP_TARGETS),
             ),
-
-            )
-
+        )
 
     override fun addToCommon(
         ftManager: FileTemplateManager,
         packageName: String,
-    ): List<GeneratorAsset> =
-        emptyList()
+    ): List<GeneratorAsset> = emptyList()
 }

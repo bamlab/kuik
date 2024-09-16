@@ -35,7 +35,6 @@ class KotlinMultiplatformFeatureModule : KotlinMultiplatformModule() {
                     implementation(composeLibs.ui)
                     implementation(composeLibs.components.resources)
                     implementation(composeLibs.components.uiToolingPreview)
-                    implementation(libs.findLibrary("koin-core").get())
                     implementation(libs.findLibrary("koin-compose").get())
                 }
         }

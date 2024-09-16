@@ -70,3 +70,7 @@ room = { id = "androidx.room", version.ref = "room" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 convention-module-feature = { id = "convention.module.feature", version = "unspecified" }
+convention-module-core = { id = "convention.module.core", version = "unspecified" }
+convention-module-data = { id = "convention.module.data", version = "unspecified" }
+convention-module-domain = { id = "convention.module.domain", version = "unspecified" }
+

@@ -23,5 +23,17 @@ gradlePlugin {
             id = "convention.module.feature"
             implementationClass = "KotlinMultiplatformFeatureModule"
         }
+        register("kotlinMultiplatformCoreModule") {
+            id = "convention.module.core"
+            implementationClass = "KotlinMultiplatformCoreModule"
+        }
+        register("kotlinMuliplatformDomainModule") {
+            id = "convention.module.domain"
+            implementationClass = "KotlinMultiplatformDomainModule"
+        }
+        register("kotlinMultiplatformDataModule") {
+            id = "convention.module.data"
+            implementationClass = "KotlinMultiplatformDataModule"
+        }
     }
 }
