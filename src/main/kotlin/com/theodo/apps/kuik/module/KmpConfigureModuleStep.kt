@@ -58,7 +58,7 @@ class KmpConfigureModuleStep(
                 KmpModuleRecipe().executeRecipe(project, model, moduleDir)
                 addModuleToSettingsGradle(project, model.moduleName, model.moduleType)
                 if (model.moduleType == ModuleType.FEATURE) {
-                    addModuleDependencyToMainApp(project, model.moduleName)
+                    addModuleDependencyToMainApp(project, model)
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -68,7 +68,7 @@ class KmpConfigureModuleStep(
 
     private fun addModuleDependencyToMainApp(
         project: Project,
-        moduleName: String,
+        module: KmpModuleModel,
     ) {
         // TODO can find the main app in another module than composeApp
         val buildFile =
@@ -78,7 +78,7 @@ class KmpConfigureModuleStep(
                 try {
                     val document = FileDocumentManager.getInstance().getDocument(buildFile)
                     if (document != null) {
-                        reallyWrite(document, moduleName)
+                        reallyWrite(document, module)
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -117,7 +117,7 @@ class KmpConfigureModuleStep(
 
     private fun reallyWrite(
         document: Document,
-        moduleName: String,
+        module: KmpModuleModel,
     ) {
         val content = document.text
 
@@ -134,7 +134,7 @@ class KmpConfigureModuleStep(
                 val adjustedInsertionPoint: Int = kotlinBlockMatch.startIndex + insertionPoint
 
                 // Insert the dependency line at the found position
-                val newModuleEntry = "implementation(project(\":feature:$moduleName\"))"
+                val newModuleEntry = "implementation(project(\":${module.moduleType}:${module.moduleName}\"))"
                 if (!document.text.contains(newModuleEntry)) {
                     document.insertString(adjustedInsertionPoint, "$newModuleEntry\n")
                 }
