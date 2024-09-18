@@ -1,4 +1,4 @@
-package com.theodo.apps.kuik.module.extraasset
+package com.theodo.apps.kuik.module.extrafilemodifier
 
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.fileEditor.FileDocumentManager

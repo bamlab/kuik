@@ -9,8 +9,8 @@ import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.models.*
 import com.theodo.apps.kuik.common.utils.Utils
-import com.theodo.apps.kuik.module.extraasset.AddModuleDepsToMainApp
-import com.theodo.apps.kuik.module.extraasset.AddModuleToSettingsGradle
+import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleDepsToMainApp
+import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleToSettingsGradle
 import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
 
 class KmpModuleRecipe {
