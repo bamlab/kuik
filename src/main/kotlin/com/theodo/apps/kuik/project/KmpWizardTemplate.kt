@@ -9,7 +9,7 @@ import com.intellij.openapi.project.ProjectManager
 import com.theodo.apps.kuik.common.generators.CommonGenerator
 import com.theodo.apps.kuik.common.models.*
 import com.theodo.apps.kuik.common.utils.Utils
-import com.theodo.apps.kuik.project.addon.AddOn
+import com.theodo.apps.kuik.project.addon.HomeAddOn
 import com.theodo.apps.kuik.project.addon.NavigationAddOn
 import org.jetbrains.kotlin.idea.core.util.toVirtualFile
 import java.net.URL
@@ -86,9 +86,10 @@ class KmpWizardTemplate {
                 }
             }
 
-    val addOns =
-        listOf<AddOn>(
+    private val addOns =
+        listOf(
             NavigationAddOn(),
+            HomeAddOn(),
         )
 
     private fun projectRecipe(

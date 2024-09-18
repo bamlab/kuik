@@ -1,15 +1,8 @@
 package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -17,9 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di.initKoin
 import ${PACKAGE_NAME}.core.navigation.MainDestination
-import ${APP_NAME_LOWERCASE}.${COMPOSE_NAME_LOWERCASE}.generated.resources.Res
-import ${APP_NAME_LOWERCASE}.${COMPOSE_NAME_LOWERCASE}.generated.resources.compose_multiplatform
-import org.jetbrains.compose.resources.painterResource
+import ${PACKAGE_NAME}.home.Home
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 

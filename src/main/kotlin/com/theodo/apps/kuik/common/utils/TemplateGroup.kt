@@ -58,4 +58,6 @@ object TemplateGroup {
     const val MAIN_DI_MODULE = "main_di_module.kt"
     const val MAIN_LOGGER_INIT = "main_logger_init.kt"
     const val NAVIGATION_DESTINATIONS = "navigation_destinations.kt"
+    const val HOME_SCREEN = "home_screen.kt"
+    const val HOME_DI_MODULE = "home_di_module.kt"
 }
