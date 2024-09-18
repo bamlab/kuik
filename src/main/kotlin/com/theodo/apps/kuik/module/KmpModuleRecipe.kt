@@ -9,6 +9,7 @@ import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.models.*
 import com.theodo.apps.kuik.common.utils.Utils
+import com.theodo.apps.kuik.module.extrafilemodifier.AddKoinModuleToMainKoinModule
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleDepsToMainApp
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleToSettingsGradle
 import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
@@ -49,6 +50,7 @@ class KmpModuleRecipe {
                 if (moduleGenerator.shouldAddModuleDependencyToMainApp()) {
                     add(AddModuleDepsToMainApp())
                 }
+                add(AddKoinModuleToMainKoinModule())
             }
         for (modifier in existingFileModifiers) {
             modifier.modify(model, project)

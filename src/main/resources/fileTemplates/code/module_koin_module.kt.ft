@@ -2,7 +2,7 @@ package ${PACKAGE_NAME}.${SHARED_NAME}.di
 
 import org.koin.dsl.module
 
-val ${MODULE_NAME}Module = module {
+val ${MODULE_NAME}KoinModule = module {
 
 }
 

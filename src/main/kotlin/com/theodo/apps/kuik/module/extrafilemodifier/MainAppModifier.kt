@@ -16,7 +16,7 @@ abstract class MainAppModifier : ExistingFileModifier {
     ) {
         // TODO make it work for other main name
         val buildFile =
-            project.guessProjectDir()?.findFileByRelativePath("composeapp")?.findFileToModify()
+            project.guessProjectDir()?.findFileByRelativePath("composeapp")?.findFileToModify(module)
         if (buildFile != null) {
             WriteCommandAction.runWriteCommandAction(project) {
                 try {
@@ -29,11 +29,11 @@ abstract class MainAppModifier : ExistingFileModifier {
                 }
             }
         } else {
-            println("Error: main app build.gradle.kts file not found.")
+            println("Error: ${this.javaClass} file to modify not found.")
         }
     }
 
-    abstract fun VirtualFile?.findFileToModify(): VirtualFile?
+    abstract fun VirtualFile?.findFileToModify(module: KmpModuleModel): VirtualFile?
 
     abstract fun writeInFile(
         document: Document,

@@ -1,10 +1,17 @@
 package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di
 
 import ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.logging.initLogger
+import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val appModule =
     module {
+        includes(listOfModuleDirectlyIncluded)
         single(createdAtStart = true, qualifier = named("Logger")) { initLogger() }
     }
+
+private val listOfModuleDirectlyIncluded: Collection<Module> =
+    listOf(
+
+    )

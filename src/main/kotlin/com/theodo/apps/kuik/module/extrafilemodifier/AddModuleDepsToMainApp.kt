@@ -8,7 +8,7 @@ import com.theodo.apps.kuik.common.utils.file.findBlock
 import com.theodo.apps.kuik.common.utils.file.findDependencyInsertionPoint
 
 class AddModuleDepsToMainApp : MainAppModifier() {
-    override fun VirtualFile?.findFileToModify(): VirtualFile? = this?.findFileByRelativePath("build.gradle.kts")
+    override fun VirtualFile?.findFileToModify(module: KmpModuleModel): VirtualFile? = this?.findFileByRelativePath("build.gradle.kts")
 
     override fun writeInFile(
         document: Document,
