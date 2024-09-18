@@ -17,19 +17,9 @@ class CoreModuleGenerator(
     ): MutableList<GeneratorAsset> =
         super.generate(list, ftManager, packageName).apply {
             operator fun GeneratorAsset.unaryPlus() = add(this)
-
             +GeneratorTemplateFile(
                 "build.gradle.kts",
                 ftManager.getCodeTemplate(TemplateGroup.MODULE_CORE_BUILD),
-            )
-            +GeneratorTemplateFile(
-                "src/commonMain/kotlin/${
-                    packageName.replace(
-                        ".",
-                        "/",
-                    )
-                }/${params.moduleLowerCase}/di/${params.moduleName}KoinModule.kt",
-                ftManager.getCodeTemplate(TemplateGroup.MODULE_KOIN_MODULE),
             )
         }
 }
