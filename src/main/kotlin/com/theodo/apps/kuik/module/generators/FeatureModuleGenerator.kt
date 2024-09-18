@@ -24,4 +24,6 @@ class FeatureModuleGenerator(
         }
 
     override fun shouldAddModuleDependencyToMainApp(): Boolean = true
+
+    override fun shouldAddKoinModuleToMainKoinModule(): Boolean = true
 }

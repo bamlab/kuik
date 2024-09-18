@@ -11,7 +11,8 @@ val appModule =
         single(createdAtStart = true, qualifier = named("Logger")) { initLogger() }
     }
 
-private val listOfModuleDirectlyIncluded: Collection<Module> =
+// Mostly features modules, others are included in them
+private val listOfModuleDirectlyIncluded =
     listOf(
 
     )

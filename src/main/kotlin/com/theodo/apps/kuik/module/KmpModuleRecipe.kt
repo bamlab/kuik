@@ -50,7 +50,9 @@ class KmpModuleRecipe {
                 if (moduleGenerator.shouldAddModuleDependencyToMainApp()) {
                     add(AddModuleDepsToMainApp())
                 }
-                add(AddKoinModuleToMainKoinModule())
+                if (moduleGenerator.shouldAddKoinModuleToMainKoinModule()) {
+                    add(AddKoinModuleToMainKoinModule())
+                }
             }
         for (modifier in existingFileModifiers) {
             modifier.modify(model, project)

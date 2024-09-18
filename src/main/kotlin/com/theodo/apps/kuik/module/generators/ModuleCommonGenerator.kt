@@ -41,4 +41,6 @@ abstract class ModuleCommonGenerator(
     }
 
     open fun shouldAddModuleDependencyToMainApp(): Boolean = params.shouldAddModuleDependencyToMainApp
+
+    open fun shouldAddKoinModuleToMainKoinModule(): Boolean = false
 }
