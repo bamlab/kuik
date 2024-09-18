@@ -32,7 +32,7 @@ class AddKoinModuleToMainKoinModule : MainAppModifier() {
         content: String,
         params: KmpModuleModel,
     ) = this.apply {
-        val insertionPoint = content.lastIndexOf("import org.koin.dsl.module") + 1
+        val insertionPoint = content.indexOf("import org.koin.dsl.module")
 
         if (insertionPoint != 1) {
             val newImportEntry =
