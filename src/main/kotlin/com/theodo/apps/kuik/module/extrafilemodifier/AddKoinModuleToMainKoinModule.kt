@@ -51,7 +51,7 @@ class AddKoinModuleToMainKoinModule : MainAppModifier() {
     ): Document =
         this.apply {
             val insertionPoint =
-                Regex("""\s*listOf\s*\(\s*""")
+                Regex("""\s*includes\s*\(\s*""")
                     .find(content)
                     ?.range
                     ?.last
