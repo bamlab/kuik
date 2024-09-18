@@ -141,7 +141,7 @@ class KmpWizardTemplate {
         val virtualFile = projectData.rootDir.toVirtualFile()
 
         virtualFile?.let { file ->
-            addOns.forEach { it.initialize(model.packageName) }
+            addOns.forEach { it.initialize(packageName) }
             val ftManager = FileTemplateManager.getDefaultInstance()
             val generatorAssets = mutableListOf<GeneratorAsset>()
             val commonGeneratorList =
