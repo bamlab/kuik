@@ -103,8 +103,7 @@ class KmpWizardTemplate {
         val (projectData, _, _) = moduleData
 
         val model = KmpModuleModel()
-        val packageName = moduleData.packageName
-
+        model.packageName = moduleData.packageName
         model.hasAndroid = includeAndroid
         model.hasWeb = includeWeb
         model.hasIOS = includeIOS
@@ -115,7 +114,7 @@ class KmpWizardTemplate {
             mapOf(
                 "APP_NAME" to moduleData.themesData.appName,
                 "APP_NAME_LOWERCASE" to moduleData.themesData.appName.lowercase(),
-                "PACKAGE_NAME" to packageName,
+                "PACKAGE_NAME" to model.packageName,
                 "SHARED_NAME" to model.moduleLowerCase,
                 "COMPOSE_NAME" to model.composeName,
                 "COMPOSE_NAME_LOWERCASE" to model.composeNameLowerCase(),
@@ -141,14 +140,13 @@ class KmpWizardTemplate {
         val virtualFile = projectData.rootDir.toVirtualFile()
 
         virtualFile?.let { file ->
-            addOns.forEach { it.initialize(packageName) }
+            addOns.forEach { it.initialize(model.packageName) }
             val ftManager = FileTemplateManager.getDefaultInstance()
             val generatorAssets = mutableListOf<GeneratorAsset>()
             val commonGeneratorList =
                 CommonGenerator(model).generate(
                     generatorAssets,
                     ftManager,
-                    packageName,
                 )
             generatorAssets.addAll(commonGeneratorList)
             generatorAssets.addAll(addOns.flatMap { it.getMainProjectFiles() })

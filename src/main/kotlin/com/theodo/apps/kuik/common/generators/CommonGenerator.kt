@@ -14,15 +14,15 @@ class CommonGenerator(
     fun generate(
         list: MutableList<GeneratorAsset>,
         ftManager: FileTemplateManager,
-        packageName: String,
     ) = list.apply {
+        val packageName = params.packageName
+
         operator fun GeneratorAsset.unaryPlus() = add(this)
 
         val generatorList: List<PlatformGenerator> =
             listOfNotNull(
                 if (params.hasAndroid) {
-                    com.theodo.apps.kuik.common.generators
-                        .AndroidGenerator(params, true)
+                    AndroidGenerator(params, true)
                 } else {
                     null
                 },
