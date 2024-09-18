@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di.initKoin
 import ${PACKAGE_NAME}.core.navigation.MainDestination
-import ${PACKAGE_NAME}.home.Home
+import ${PACKAGE_NAME}.feature.home.Home
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 
@@ -29,25 +29,6 @@ fun App() {
                 composable(MainDestination.Home.route) {
                     Home()
                 }
-            }
-        }
-    }
-}
-
-@Composable
-fun Home() {
-    var showContent by remember { mutableStateOf(false) }
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = { showContent = !showContent }) {
-            Text("Click me!")
-        }
-        AnimatedVisibility(showContent) {
-            Column(
-                Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Image(painterResource(Res.drawable.compose_multiplatform), null)
-                Text("Hello")
             }
         }
     }
