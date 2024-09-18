@@ -15,6 +15,7 @@ class AddModuleDepsToMainApp : ExistingFileModifier {
         module: KmpModuleModel,
         project: Project,
     ) {
+        // TODO make it work for other main name
         val buildFile =
             project.guessProjectDir()?.findFileByRelativePath("composeapp")?.findFileByRelativePath("build.gradle.kts")
         if (buildFile != null) {
