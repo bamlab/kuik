@@ -22,50 +22,49 @@ class AddKoinModuleToMainKoinModule : MainAppModifier() {
     ) {
         val content = document.text
 
-        insertModule(content, params, document)
-        insertImport(content, params, document)
+        document
+            .insertModule(content, params)
+            .insertImport(content, params)
+        FileDocumentManager.getInstance().saveDocument(document)
     }
 
-    private fun insertImport(
+    private fun Document.insertImport(
         content: String,
         params: KmpModuleModel,
-        document: Document,
-    ) {
+    ) = this.apply {
         val insertionPoint = content.lastIndexOf("import org.koin.dsl.module") + 1
 
         if (insertionPoint != 1) {
             val newImportEntry =
                 "import ${params.packageName}.${params.moduleLowerCase}.di.${params.moduleName}KoinModule"
-            if (!document.text.contains(newImportEntry)) {
-                document.insertString(insertionPoint, "$newImportEntry\n")
+            if (!text.contains(newImportEntry)) {
+                insertString(insertionPoint, "$newImportEntry\n")
             }
-            FileDocumentManager.getInstance().saveDocument(document)
         } else {
             println("Error: Could not find a suitable included koin module block.")
         }
     }
 
-    private fun insertModule(
+    private fun Document.insertModule(
         content: String,
         params: KmpModuleModel,
-        document: Document,
-    ) {
-        val insertionPoint =
-            Regex("""\s*listOf\s*\(\s*""")
-                .find(content)
-                ?.range
-                ?.last
-                ?.plus(1)
+    ): Document =
+        this.apply {
+            val insertionPoint =
+                Regex("""\s*listOf\s*\(\s*""")
+                    .find(content)
+                    ?.range
+                    ?.last
+                    ?.plus(1)
 
-        if (insertionPoint != null) {
-            val newModuleEntry =
-                "${params.moduleName}KoinModule,"
-            if (!document.text.contains(newModuleEntry)) {
-                document.insertString(insertionPoint, "$newModuleEntry\n")
+            if (insertionPoint != null) {
+                val newModuleEntry =
+                    "${params.moduleName}KoinModule,"
+                if (!text.contains(newModuleEntry)) {
+                    insertString(insertionPoint, "$newModuleEntry\n")
+                }
+            } else {
+                println("Error: Could not find a suitable included koin module block.")
             }
-            FileDocumentManager.getInstance().saveDocument(document)
-        } else {
-            println("Error: Could not find a suitable included koin module block.")
         }
-    }
 }

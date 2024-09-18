@@ -22,6 +22,7 @@ class CoreModuleGenerator(
                 "build.gradle.kts",
                 ftManager.getCodeTemplate(TemplateGroup.MODULE_CORE_BUILD),
             )
+            // FIXME it does not work
             +GeneratorTemplateFile(
                 "di/${params.moduleName}KoinModule/kt",
                 ftManager.getCodeTemplate(TemplateGroup.MODULE_KOIN_MODULE),
