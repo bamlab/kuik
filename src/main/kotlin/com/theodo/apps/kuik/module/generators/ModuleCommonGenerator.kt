@@ -12,7 +12,6 @@ import com.theodo.apps.kuik.common.generators.*
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.file.findBlock
 import com.theodo.apps.kuik.common.utils.file.findDependencyInsertionPoint
-import com.theodo.apps.kuik.module.model.ModuleType
 import java.io.IOException
 
 abstract class ModuleCommonGenerator(
@@ -36,32 +35,6 @@ abstract class ModuleCommonGenerator(
 
         addAll(generatorList.flatMap { it.commonFiles(ftManager, packageName) })
         addAll(generatorList.flatMap { it.generate(ftManager, packageName) })
-    }
-
-    fun addModuleToSettingsGradle(
-        project: Project,
-        moduleName: String,
-        moduleType: ModuleType,
-    ) {
-        val settingsFile = project.guessProjectDir()?.findFileByRelativePath("settings.gradle.kts")
-        if (settingsFile != null) {
-            WriteCommandAction.runWriteCommandAction(project) {
-                try {
-                    val document = FileDocumentManager.getInstance().getDocument(settingsFile)
-                    if (document != null) {
-                        val newModuleEntry = "include(\":${moduleType.folderName()}:$moduleName\")"
-                        if (!document.text.contains(newModuleEntry)) {
-                            document.insertString(document.textLength, "\n$newModuleEntry")
-                        }
-                        FileDocumentManager.getInstance().saveDocument(document)
-                    }
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-            }
-        } else {
-            println("Error: settings.gradle.kts file not found.")
-        }
     }
 
     fun addModuleDependencyToMainApp(project: Project) {
