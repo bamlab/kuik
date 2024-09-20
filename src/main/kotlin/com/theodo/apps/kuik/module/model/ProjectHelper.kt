@@ -10,6 +10,38 @@ import org.jetbrains.annotations.VisibleForTesting
 object ProjectHelper {
     fun getProject(): Project = ProjectManager.getInstance().openProjects.last()
 
+    fun getPackage(): String? {
+        val relPath = "${getProjectMainModule()}/build.gradle.kts"
+        val mainModuleBuildFileContent =
+            getContent(
+                project = getProject(),
+                relPath = relPath,
+            ) ?: return null
+        return getPackage(mainModuleBuildFileContent).also {
+            if (it == null) {
+                println("Regex not found in $relPath")
+            }
+        }
+    }
+
+    @VisibleForTesting
+    fun getPackage(content: String): String? {
+        // search in applicationId
+        // applicationId = "com.theodo.myapplication"
+        val matchResult =
+            Regex("""applicationId\s*=\s*["'](.*)["']""")
+                .find(content)
+
+        return matchResult?.range?.let {
+            content
+                .substring(it)
+                .substringBeforeLast("\"")
+                .substringAfter("\"")
+                .substringBeforeLast("'")
+                .substringAfter("'")
+        }
+    }
+
     fun getProjectMainModule(): String? {
         val relPath = "settings.gradle.kts"
         val content = getContent(getProject(), relPath) ?: return null
