@@ -51,7 +51,7 @@ class AddScreenToNavHost : MainAppModifier() {
     ): Document =
         this.apply {
             val insertionPoint =
-                Regex("""(\}\s*){4}""")
+                Regex("""(\}\s*){4}\z""")
                     .find(content)
                     ?.range
                     ?.first
@@ -62,7 +62,7 @@ class AddScreenToNavHost : MainAppModifier() {
                 composable(MainDestination.$moduleNameWithUpperFirstLetter.route) {
                     ${moduleNameWithUpperFirstLetter}Screen()
                 }
-"""
+            """
                 if (!text.contains(newModuleEntry)) {
                     insertString(insertionPoint, "$newModuleEntry\n")
                 }
