@@ -1,5 +1,6 @@
 package com.theodo.apps.kuik.module
 
+import com.android.tools.idea.nav.safeargs.psi.java.toUpperCamelCase
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorEmptyDirectory
@@ -12,6 +13,9 @@ import com.theodo.apps.kuik.common.utils.Utils
 import com.theodo.apps.kuik.module.extrafilemodifier.AddKoinModuleToMainKoinModule
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleDepsToMainApp
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleToSettingsGradle
+import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenRoute
+import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenToNavHost
+import com.theodo.apps.kuik.module.generators.FeatureModuleGenerator
 import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
 
 class KmpModuleRecipe {
@@ -27,6 +31,7 @@ class KmpModuleRecipe {
                 "PACKAGE_NAME" to model.packageName,
                 "SHARED_NAME" to model.moduleLowerCase,
                 "MODULE_NAME" to model.moduleName,
+                "MODULE_UPPER_CAMELCASE_NAME" to model.moduleName.toUpperCamelCase(),
                 "HAS_ANDROID" to model.hasAndroid,
                 "HAS_IOS" to model.hasIOS,
                 "HAS_WEB" to model.hasWeb,
@@ -52,6 +57,9 @@ class KmpModuleRecipe {
                 }
                 if (moduleGenerator.shouldAddKoinModuleToMainKoinModule()) {
                     add(AddKoinModuleToMainKoinModule())
+                }
+                if (moduleGenerator is FeatureModuleGenerator) {
+                    addAll(listOf(AddScreenRoute(), AddScreenToNavHost()))
                 }
             }
         for (modifier in existingFileModifiers) {

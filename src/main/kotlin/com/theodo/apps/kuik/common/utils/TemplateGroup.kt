@@ -11,6 +11,7 @@ object TemplateGroup {
     const val MODULE_DOMAIN_BUILD = "module_domain_build.gradle.kts"
     const val MODULE_DATA_BUILD = "module_data_build.gradle.kts"
     const val MODULE_KOIN_MODULE = "module_koin_module.kt"
+    const val MODULE_SCREEN = "module_screen.kt"
     const val COMMON_PLATFORM = "common_platform.kt"
     const val DEFAULT_PLATFORM = "default_platform.kt"
     const val JVM_PLATFORM = "jvm_platform.kt"

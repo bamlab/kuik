@@ -3,5 +3,4 @@ package ${PACKAGE_NAME}.${SHARED_NAME}
 sealed class MainDestination(
     val route: String,
 ) {
-    data object Home : MainDestination("home")
 }

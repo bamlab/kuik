@@ -3,6 +3,7 @@ package com.theodo.apps.kuik.common.models
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.android.tools.idea.nav.safeargs.psi.java.toUpperCamelCase
 import com.android.tools.idea.wizard.model.WizardModel
 import com.theodo.apps.kuik.module.model.ModuleType
 
@@ -22,6 +23,8 @@ class KmpModuleModel : WizardModel() {
     var shouldAddModuleDependencyToMainApp by mutableStateOf(false)
 
     fun composeNameLowerCase() = composeName.lowercase()
+
+    fun moduleUpperCamelCase() = moduleName.toUpperCamelCase()
 
     override fun handleFinished() {
     }

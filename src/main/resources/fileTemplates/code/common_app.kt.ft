@@ -10,7 +10,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di.initKoin
 import ${PACKAGE_NAME}.core.navigation.MainDestination
-import ${PACKAGE_NAME}.feature.home.Home
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 
@@ -26,9 +25,6 @@ fun App() {
                 modifier =
                     Modifier.fillMaxSize(),
             ) {
-                composable(MainDestination.Home.route) {
-                    Home()
-                }
             }
         }
     }

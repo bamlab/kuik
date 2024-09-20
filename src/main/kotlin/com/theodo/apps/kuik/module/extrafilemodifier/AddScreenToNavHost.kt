@@ -36,7 +36,7 @@ class AddScreenToNavHost : MainAppModifier() {
 
         if (insertionPoint != 0) {
             val newImportEntry =
-                "import ${params.packageName}.${params.moduleLowerCase}.${params.moduleName}Screen"
+                "import ${params.packageName}.${params.moduleLowerCase}.${params.moduleUpperCamelCase()}Screen"
             if (!text.contains(newImportEntry)) {
                 insertString(insertionPoint, "$newImportEntry\n")
             }
@@ -57,11 +57,12 @@ class AddScreenToNavHost : MainAppModifier() {
                     ?.first
 
             if (insertionPoint != null) {
+                val moduleNameWithUpperFirstLetter = params.moduleUpperCamelCase()
                 val newModuleEntry = """
-                    composable("MainDestination.${params.moduleName}.route") {
-                        ${params.moduleName}Screen()
-                    }
-                    """
+                composable(MainDestination.$moduleNameWithUpperFirstLetter.route) {
+                    ${moduleNameWithUpperFirstLetter}Screen()
+                }
+"""
                 if (!text.contains(newModuleEntry)) {
                     insertString(insertionPoint, "$newModuleEntry\n")
                 }

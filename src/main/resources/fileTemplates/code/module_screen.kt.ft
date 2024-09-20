@@ -1,0 +1,13 @@
+package ${PACKAGE_NAME}.${SHARED_NAME}
+
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun ${MODULE_UPPER_CAMELCASE_NAME}Screen() {
+    Text(text = "${MODULE_UPPER_CAMELCASE_NAME}", Modifier.padding(16.dp))
+}
+
