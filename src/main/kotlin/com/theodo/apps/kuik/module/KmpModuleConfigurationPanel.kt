@@ -2,6 +2,7 @@ package com.theodo.apps.kuik.module
 
 import com.intellij.util.ui.JBUI
 import com.theodo.apps.kuik.module.model.ModuleType
+import com.theodo.apps.kuik.module.model.ProjectHelper
 import java.awt.*
 import java.awt.event.ActionListener
 import javax.swing.*
@@ -9,7 +10,7 @@ import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 
 class KmpModuleConfigurationPanel : JPanel() {
-    private val defaultPackage = "com.example"
+    private val defaultPackage = ProjectHelper.getPackage() ?: "com.theodo.example"
     private val packageNameLabel: JLabel = JLabel("Package Name:")
     private val packageNameField: JTextField = JTextField(15)
     private val completePackageNameField: JLabel = JLabel("")
