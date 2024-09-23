@@ -19,7 +19,7 @@ class FeatureModuleGenerator(
             operator fun GeneratorAsset.unaryPlus() = add(this)
             +GeneratorTemplateFile(
                 "src/commonMain/kotlin/${params.packageName.toFolders()}/${params.moduleLowerCase}/${params.moduleUpperCamelCase()}Screen.kt",
-                FileTemplateManager.getDefaultInstance().getCodeTemplate(TemplateGroup.MODULE_SCREEN),
+                ftManager.getCodeTemplate(TemplateGroup.MODULE_SCREEN),
             )
             +GeneratorTemplateFile(
                 "build.gradle.kts",
