@@ -17,6 +17,7 @@ import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenRoute
 import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenToNavHost
 import com.theodo.apps.kuik.module.generators.FeatureModuleGenerator
 import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
+import org.jetbrains.annotations.VisibleForTesting
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
@@ -28,7 +29,6 @@ class KmpModuleRecipe : KoinComponent {
         moduleDir: VirtualFile,
         additionalAssets: List<GeneratorAsset> = emptyList(),
     ) {
-        val ftManager by inject<FileTemplateManager>()
         val templateData =
             mapOf(
                 "PACKAGE_NAME" to model.packageName,
@@ -47,6 +47,26 @@ class KmpModuleRecipe : KoinComponent {
                 model.hasWeb(),
                 model.hasServer(),
             )
+
+        generateAssets(
+            moduleDir = moduleDir,
+            generatorAssets =
+                defineAssets(
+                    project = project,
+                    model = model,
+                    additionalAssets = additionalAssets,
+                ),
+            templateData = templateData,
+        )
+    }
+
+    @VisibleForTesting
+    fun defineAssets(
+        project: Project,
+        model: KmpModuleModel,
+        additionalAssets: List<GeneratorAsset> = emptyList(),
+    ): List<GeneratorAsset> {
+        val ftManager by inject<FileTemplateManager>()
 
         val generatorAssets = mutableListOf<GeneratorAsset>()
         val moduleGenerator = ModuleGeneratorFactory.generate(model)
@@ -74,7 +94,14 @@ class KmpModuleRecipe : KoinComponent {
         val moduleCommonList = moduleGenerator.generate(generatorAssets, ftManager, model.packageName)
         generatorAssets.addAll(moduleCommonList)
 
-        // Finally generate assets
+        return generatorAssets
+    }
+
+    private fun generateAssets(
+        moduleDir: VirtualFile,
+        generatorAssets: List<GeneratorAsset>,
+        templateData: Map<String, Any>,
+    ) {
         generatorAssets.forEach { asset ->
             when (asset) {
                 is GeneratorEmptyDirectory -> createEmptyDirectory(moduleDir, asset.relativePath)
