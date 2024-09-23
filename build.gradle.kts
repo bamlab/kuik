@@ -46,6 +46,8 @@ dependencies {
     implementation("org.freemarker:freemarker:2.3.31")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.0.20")
     testImplementation("io.mockk:mockk-jvm:1.13.12")
+    implementation("io.insert-koin:koin-core-jvm:4.0.0")
+    testImplementation("io.insert-koin:koin-test-jvm:4.0.0")
 }
 
 tasks {

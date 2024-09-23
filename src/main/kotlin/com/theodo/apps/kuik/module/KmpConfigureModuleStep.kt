@@ -6,6 +6,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.models.KmpModuleModel
+import org.koin.core.context.startKoin
+import org.koin.java.KoinJavaComponent
 import java.io.IOException
 import javax.swing.JComponent
 
@@ -44,13 +46,19 @@ class KmpConfigureModuleStep(
         project: Project,
         model: KmpModuleModel,
     ) {
+        startKoin {
+            modules(KmpModuleModule.module)
+        }
         WriteCommandAction.runWriteCommandAction(project) {
             try {
                 val baseDir = project.guessProjectDir() ?: return@runWriteCommandAction
                 val moduleTypeDir =
                     baseDir.findFileByRelativePath(model.moduleType.folderName()) ?: return@runWriteCommandAction
                 val moduleDir = createDirectory(moduleTypeDir, model.moduleName)
-                KmpModuleRecipe().executeRecipe(project, model, moduleDir)
+                KoinJavaComponent
+                    .getKoin()
+                    .get<KmpModuleRecipe>()
+                    .executeRecipe(project, model, moduleDir)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
