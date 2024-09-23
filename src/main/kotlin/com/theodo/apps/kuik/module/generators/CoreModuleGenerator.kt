@@ -3,7 +3,6 @@ package com.theodo.apps.kuik.module.generators
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorTemplateFile
-import com.theodo.apps.kuik.common.generators.*
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
 

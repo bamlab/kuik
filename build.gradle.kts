@@ -48,6 +48,7 @@ dependencies {
     testImplementation("io.mockk:mockk-jvm:1.13.12")
     implementation("io.insert-koin:koin-core-jvm:4.0.0")
     testImplementation("io.insert-koin:koin-test-jvm:4.0.0")
+    testImplementation("io.insert-koin:koin-test-junit4:4.0.0")
 }
 
 tasks {
