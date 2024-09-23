@@ -29,25 +29,6 @@ class KmpModuleRecipe : KoinComponent {
         moduleDir: VirtualFile,
         additionalAssets: List<GeneratorAsset> = emptyList(),
     ) {
-        val templateData =
-            mapOf(
-                "PACKAGE_NAME" to model.packageName,
-                "SHARED_NAME" to model.moduleLowerCase,
-                "MODULE_NAME" to model.moduleName,
-                "MODULE_UPPER_CAMELCASE_NAME" to model.moduleName.toUpperCamelCase(),
-                "HAS_ANDROID" to model.hasAndroid,
-                "HAS_IOS" to model.hasIOS,
-                "HAS_WEB" to model.hasWeb,
-                "HAS_DESKTOP" to model.hasDesktop,
-                "BUILD_VERSION_SDK_INT" to "\${Build.VERSION.SDK_INT}",
-                "JVM_JAVA_VERSION" to "\${System.getProperty(\"java.version\")}",
-                model.hasAndroid(),
-                model.hasDesktop(),
-                model.hasIOS(),
-                model.hasWeb(),
-                model.hasServer(),
-            )
-
         generateAssets(
             moduleDir = moduleDir,
             generatorAssets =
@@ -56,9 +37,28 @@ class KmpModuleRecipe : KoinComponent {
                     model = model,
                     additionalAssets = additionalAssets,
                 ),
-            templateData = templateData,
+            templateData = templateData(model),
         )
     }
+
+    private fun templateData(model: KmpModuleModel): Map<String, Any> =
+        mapOf(
+            "PACKAGE_NAME" to model.packageName,
+            "SHARED_NAME" to model.moduleLowerCase,
+            "MODULE_NAME" to model.moduleName,
+            "MODULE_UPPER_CAMELCASE_NAME" to model.moduleName.toUpperCamelCase(),
+            "HAS_ANDROID" to model.hasAndroid,
+            "HAS_IOS" to model.hasIOS,
+            "HAS_WEB" to model.hasWeb,
+            "HAS_DESKTOP" to model.hasDesktop,
+            "BUILD_VERSION_SDK_INT" to "\${Build.VERSION.SDK_INT}",
+            "JVM_JAVA_VERSION" to "\${System.getProperty(\"java.version\")}",
+            model.hasAndroid(),
+            model.hasDesktop(),
+            model.hasIOS(),
+            model.hasWeb(),
+            model.hasServer(),
+        )
 
     @VisibleForTesting
     fun defineAssets(
