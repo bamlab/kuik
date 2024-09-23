@@ -12,33 +12,33 @@ abstract class ModuleCommonGenerator(
     private val params: KmpModuleModel,
 ) {
     open fun generate(
-        list: MutableList<GeneratorAsset>,
         ftManager: FileTemplateManager,
         packageName: String,
-    ) = list.apply {
-        operator fun GeneratorAsset.unaryPlus() = add(this)
+    ): List<GeneratorAsset> =
+        buildList {
+            operator fun GeneratorAsset.unaryPlus() = add(this)
 
-        val generatorList: List<PlatformGenerator> =
-            listOfNotNull(
-                if (params.hasAndroid) AndroidGenerator(params, false) else null,
-                if (params.hasIOS) IOSGenerator(params, false) else null,
+            val generatorList: List<PlatformGenerator> =
+                listOfNotNull(
+                    if (params.hasAndroid) AndroidGenerator(params, false) else null,
+                    if (params.hasIOS) IOSGenerator(params, false) else null,
+                )
+
+            // Common
+            +GeneratorEmptyDirectory("src/commonMain/kotlin/${packageName.replace(".", "/")}/${params.moduleLowerCase}")
+            +GeneratorTemplateFile(
+                "src/commonMain/kotlin/${
+                    packageName.replace(
+                        ".",
+                        "/",
+                    )
+                }/${params.moduleLowerCase}/di/${params.moduleName}KoinModule.kt",
+                ftManager.getCodeTemplate(TemplateGroup.MODULE_KOIN_MODULE),
             )
 
-        // Common
-        +GeneratorEmptyDirectory("src/commonMain/kotlin/${packageName.replace(".", "/")}/${params.moduleLowerCase}")
-        +GeneratorTemplateFile(
-            "src/commonMain/kotlin/${
-                packageName.replace(
-                    ".",
-                    "/",
-                )
-            }/${params.moduleLowerCase}/di/${params.moduleName}KoinModule.kt",
-            ftManager.getCodeTemplate(TemplateGroup.MODULE_KOIN_MODULE),
-        )
-
-        addAll(generatorList.flatMap { it.commonFiles(ftManager, packageName) })
-        addAll(generatorList.flatMap { it.generate(ftManager, packageName) })
-    }
+            addAll(generatorList.flatMap { it.commonFiles(ftManager, packageName) })
+            addAll(generatorList.flatMap { it.generate(ftManager, packageName) })
+        }
 
     open fun shouldAddModuleDependencyToMainApp(): Boolean = params.shouldAddModuleDependencyToMainApp
 

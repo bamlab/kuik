@@ -11,16 +11,16 @@ class DataModuleGenerator(
     private val params: KmpModuleModel,
 ) : ModuleCommonGenerator(params) {
     override fun generate(
-        list: MutableList<GeneratorAsset>,
         ftManager: FileTemplateManager,
         packageName: String,
-    ): MutableList<GeneratorAsset> =
-        super.generate(list, ftManager, packageName).apply {
-            operator fun GeneratorAsset.unaryPlus() = add(this)
+    ) = buildList {
+        addAll(super.generate(ftManager, packageName))
 
-            +GeneratorTemplateFile(
-                "build.gradle.kts",
-                ftManager.getCodeTemplate(TemplateGroup.MODULE_DATA_BUILD),
-            )
-        }
+        operator fun GeneratorAsset.unaryPlus() = add(this)
+
+        +GeneratorTemplateFile(
+            "build.gradle.kts",
+            ftManager.getCodeTemplate(TemplateGroup.MODULE_DATA_BUILD),
+        )
+    }
 }

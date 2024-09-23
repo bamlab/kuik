@@ -91,7 +91,7 @@ class KmpModuleRecipe : KoinComponent {
         // 3 - Add additional assets can override module files
         generatorAssets.addAll(additionalAssets)
         // 4 - Generate module files
-        val moduleCommonList = moduleGenerator.generate(generatorAssets, ftManager, model.packageName)
+        val moduleCommonList = moduleGenerator.generate(ftManager, model.packageName)
         generatorAssets.addAll(moduleCommonList)
 
         return generatorAssets

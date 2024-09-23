@@ -11,11 +11,12 @@ class FeatureModuleGenerator(
     private val params: KmpModuleModel,
 ) : ModuleCommonGenerator(params) {
     override fun generate(
-        list: MutableList<GeneratorAsset>,
         ftManager: FileTemplateManager,
         packageName: String,
-    ): MutableList<GeneratorAsset> =
-        super.generate(list, ftManager, packageName).apply {
+    ): List<GeneratorAsset> =
+        buildList {
+            addAll(super.generate(ftManager, packageName))
+
             operator fun GeneratorAsset.unaryPlus() = add(this)
             +GeneratorTemplateFile(
                 "src/commonMain/kotlin/${params.packageName.toFolders()}/${params.moduleLowerCase}/${params.moduleUpperCamelCase()}Screen.kt",
