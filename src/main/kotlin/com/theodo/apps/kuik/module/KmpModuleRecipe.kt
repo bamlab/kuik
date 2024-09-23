@@ -19,6 +19,7 @@ import com.theodo.apps.kuik.module.generators.FeatureModuleGenerator
 import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.component.inject
 
 class KmpModuleRecipe : KoinComponent {
     fun executeRecipe(
@@ -27,7 +28,7 @@ class KmpModuleRecipe : KoinComponent {
         moduleDir: VirtualFile,
         additionalAssets: List<GeneratorAsset> = emptyList(),
     ) {
-        val ftManager = FileTemplateManager.getInstance(project)
+        val ftManager by inject<FileTemplateManager>()
         val templateData =
             mapOf(
                 "PACKAGE_NAME" to model.packageName,
