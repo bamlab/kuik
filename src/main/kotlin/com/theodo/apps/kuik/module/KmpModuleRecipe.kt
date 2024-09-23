@@ -17,8 +17,10 @@ import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenRoute
 import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenToNavHost
 import com.theodo.apps.kuik.module.generators.FeatureModuleGenerator
 import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
-class KmpModuleRecipe {
+class KmpModuleRecipe : KoinComponent {
     fun executeRecipe(
         project: Project,
         model: KmpModuleModel,
@@ -50,16 +52,16 @@ class KmpModuleRecipe {
         val existingFileModifiers =
             buildList {
                 // 1 - Add module to settings.gradle.kts
-                add(AddModuleToSettingsGradle())
+                add(get<AddModuleToSettingsGradle>())
                 // 2 - add Module dep to main app
                 if (moduleGenerator.shouldAddModuleDependencyToMainApp()) {
-                    add(AddModuleDepsToMainApp())
+                    add(get<AddModuleDepsToMainApp>())
                 }
                 if (moduleGenerator.shouldAddKoinModuleToMainKoinModule()) {
-                    add(AddKoinModuleToMainKoinModule())
+                    add(get<AddKoinModuleToMainKoinModule>())
                 }
                 if (moduleGenerator is FeatureModuleGenerator) {
-                    addAll(listOf(AddScreenRoute(), AddScreenToNavHost()))
+                    addAll(listOf(get<AddScreenRoute>(), get<AddScreenToNavHost>()))
                 }
             }
         for (modifier in existingFileModifiers) {
