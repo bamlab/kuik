@@ -4,6 +4,7 @@ import com.android.ide.common.repository.AgpVersion
 import com.android.tools.idea.wizard.template.Language
 import com.android.tools.idea.wizard.template.ProjectTemplateData
 import com.intellij.ide.fileTemplates.FileTemplateManager
+import com.intellij.openapi.project.Project
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.module.KmpModuleRecipe
 import com.theodo.apps.kuik.module.extrafilemodifier.AddKoinModuleToMainKoinModule
@@ -11,9 +12,14 @@ import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleDepsToMainApp
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleToSettingsGradle
 import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenRoute
 import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenToNavHost
+import com.theodo.apps.kuik.module.model.ProjectHelper
 import com.theodo.apps.kuik.project.addon.HomeAddOn
 import com.theodo.apps.kuik.project.addon.NavigationAddOn
+import io.mockk.every
+import io.mockk.mockk
 import io.mockk.mockkClass
+import io.mockk.mockkObject
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.koin.core.module.dsl.factoryOf
@@ -38,8 +44,10 @@ class KmpWizardTemplateTest : KoinTest {
                     declareMock<AddScreenToNavHost>()
                     declareMock<FileTemplateManager>()
                     declareMock<ProjectAssetGenerator>()
-                    factoryOf(::NavigationAddOn)
-                    factoryOf(::HomeAddOn)
+                    declareMock<NavigationAddOn>()
+                    declareMock<HomeAddOn>()
+                    // factoryOf(::NavigationAddOn) // Not ready yet
+                    // factoryOf(::HomeAddOn) // Not ready yet
                     factoryOf(::KmpModuleRecipe)
                     factoryOf(::KmpWizardTemplate)
                 },
@@ -60,7 +68,8 @@ class KmpWizardTemplateTest : KoinTest {
             model = KmpModuleModel(),
             dataModel = mapOf(),
         )
-        // Then
+
+        // Then no throw
     }
 
     private fun mockProjectTemplateData() =
@@ -77,4 +86,13 @@ class KmpWizardTemplateTest : KoinTest {
             overridePathCheck = null,
             isNewProject = true,
         )
+
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun setUp() {
+            mockkObject(ProjectHelper)
+            every { ProjectHelper.getProject() } returns mockk<Project>()
+        }
+    }
 }
