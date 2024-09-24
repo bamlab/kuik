@@ -3,22 +3,20 @@ package com.theodo.apps.kuik.project
 import com.android.tools.idea.wizard.template.*
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
-import com.intellij.ide.starters.local.GeneratorEmptyDirectory
-import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.theodo.apps.kuik.common.generators.CommonGenerator
 import com.theodo.apps.kuik.common.models.*
-import com.theodo.apps.kuik.common.utils.Utils
 import com.theodo.apps.kuik.module.model.ProjectHelper
 import com.theodo.apps.kuik.project.addon.AddOn
 import com.theodo.apps.kuik.project.addon.HomeAddOn
 import com.theodo.apps.kuik.project.addon.NavigationAddOn
-import org.jetbrains.kotlin.idea.core.util.toVirtualFile
+import org.jetbrains.annotations.VisibleForTesting
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
 import java.net.URL
 
 class KmpWizardTemplate : KoinComponent {
+    private val assetGenerator by inject<ProjectAssetGenerator>()
     val projectTemplate
         get() =
             template {
@@ -141,34 +139,30 @@ class KmpWizardTemplate : KoinComponent {
                 model.hasServer(),
             )
 
-        val virtualFile = projectData.rootDir.toVirtualFile()
+        defineAssets(
+            projectData = projectData,
+            model = model,
+            dataModel = dataModel,
+        )
+    }
 
-        virtualFile?.let { file ->
-            addOns.forEach { it.initialize(model.packageName) }
-            val ftManager by inject<FileTemplateManager>()
-            val generatorAssets = mutableListOf<GeneratorAsset>()
-            val commonGeneratorList =
-                CommonGenerator(model).generate(
-                    generatorAssets,
-                    ftManager,
-                )
-            generatorAssets.addAll(commonGeneratorList)
-            generatorAssets.addAll(addOns.flatMap { it.getMainProjectFiles() })
-            generatorAssets.forEach { asset ->
-                when (asset) {
-                    is GeneratorEmptyDirectory -> createEmptyDirectory(file, asset.relativePath)
-                    is GeneratorTemplateFile ->
-                        Utils.generateFileFromTemplate(
-                            templateName = "${asset.template.name}.${asset.template.extension}",
-                            dataModel = dataModel,
-                            outputDir = file,
-                            outputFilePath = asset.relativePath,
-                        )
-
-                    else -> println("Generator Asset: Nothing")
-                }
-            }
-        }
+    @VisibleForTesting
+    fun defineAssets(
+        projectData: ProjectTemplateData,
+        model: KmpModuleModel,
+        dataModel: Map<String, Any>,
+    ) {
+        addOns.forEach { it.initialize(model.packageName) }
+        val ftManager by inject<FileTemplateManager>()
+        val generatorAssets = mutableListOf<GeneratorAsset>()
+        val commonGeneratorList =
+            CommonGenerator(model).generate(
+                generatorAssets,
+                ftManager,
+            )
+        generatorAssets.addAll(commonGeneratorList)
+        generatorAssets.addAll(addOns.flatMap { it.getMainProjectFiles() })
+        assetGenerator.generateAssets(projectData, generatorAssets, dataModel)
         val project = ProjectHelper.getProject()
         addOns.forEach { it.generateAddOnModule(project) }
     }
