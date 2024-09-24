@@ -21,9 +21,9 @@ class HomeAddOn :
 
     override fun shouldAddModuleDependencyToMainApp(): Boolean = true
 
-    override fun generateAddOnModule(project: Project) {
+    override fun generateAddOnModule(project: Project): List<GeneratorAsset> {
         val moduleTypeDir = getModuleTypeDirectory(project)
-        if (moduleTypeDir != null) {
+        return if (moduleTypeDir != null) {
             val moduleDir =
                 createEmptyDirectory(
                     moduleTypeDir,
@@ -43,6 +43,8 @@ class HomeAddOn :
                         // ),
                     ),
             )
+        } else {
+            emptyList()
         }
     }
 }

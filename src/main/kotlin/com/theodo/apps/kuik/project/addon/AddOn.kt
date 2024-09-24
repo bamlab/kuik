@@ -18,7 +18,7 @@ abstract class AddOn {
 
     open fun shouldAddModuleDependencyToMainApp(): Boolean = false
 
-    abstract fun generateAddOnModule(project: Project)
+    abstract fun generateAddOnModule(project: Project): List<GeneratorAsset>
 
     fun getModuleTypeDirectory(project: Project): VirtualFile? {
         val baseDir = project.guessProjectDir() ?: return null

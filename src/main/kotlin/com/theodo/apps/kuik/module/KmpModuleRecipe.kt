@@ -28,17 +28,19 @@ class KmpModuleRecipe : KoinComponent {
         model: KmpModuleModel,
         moduleDir: VirtualFile,
         additionalAssets: List<GeneratorAsset> = emptyList(),
-    ) {
+    ): List<GeneratorAsset> {
+        val assetsToGenerate =
+            defineAssets(
+                project = project,
+                model = model,
+                additionalAssets = additionalAssets,
+            )
         generateAssets(
             moduleDir = moduleDir,
-            generatorAssets =
-                defineAssets(
-                    project = project,
-                    model = model,
-                    additionalAssets = additionalAssets,
-                ),
+            generatorAssets = assetsToGenerate,
             templateData = templateData(model),
         )
+        return assetsToGenerate
     }
 
     private fun templateData(model: KmpModuleModel): Map<String, Any> =

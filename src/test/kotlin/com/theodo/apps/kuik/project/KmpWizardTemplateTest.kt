@@ -41,10 +41,8 @@ class KmpWizardTemplateTest : KoinTest {
                     declareMock<AddScreenToNavHost>()
                     declareMock<FileTemplateManager>()
                     declareMock<ProjectAssetGenerator>()
-                    declareMock<NavigationAddOn>()
-                    declareMock<HomeAddOn>()
-                    // factoryOf(::NavigationAddOn) // Not ready yet
-                    // factoryOf(::HomeAddOn) // Not ready yet
+                    factoryOf(::NavigationAddOn)
+                    factoryOf(::HomeAddOn)
                     factoryOf(::KmpModuleRecipe)
                     factoryOf(::KmpWizardTemplate)
                 },
@@ -65,10 +63,11 @@ class KmpWizardTemplateTest : KoinTest {
             }
 
         // When
-        val assets =
+        val baseAssets =
             template.defineAssets(
                 model = model,
             )
+        // val addOnAssests = template.generateAddOnAssets(mockk(relaxed = true)) // Not ready yet
 
         // Then
         assertListEquals(
@@ -114,9 +113,9 @@ class KmpWizardTemplateTest : KoinTest {
                     "build-logic/convention/src/main/kotlin/KotlinMultiplatformModule.kt",
                     "build-logic/convention/src/main/kotlin/KmpModule.kt",
                     "build-logic/convention/src/main/kotlin/AndroidSdkVersion.kt",
-                "build-logic/convention/src/main/kotlin/KmpTargets.kt",
-            ),
-            actual = assets.map { it.relativePath },
+                    "build-logic/convention/src/main/kotlin/KmpTargets.kt",
+                ),
+            actual = baseAssets.map { it.relativePath },
         )
     }
 
