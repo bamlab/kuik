@@ -1,6 +1,7 @@
 package com.theodo.apps.kuik.module
 
 import com.intellij.ide.fileTemplates.FileTemplateManager
+import com.theodo.apps.kuik.assertListEquals
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.module.extrafilemodifier.AddKoinModuleToMainKoinModule
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleDepsToMainApp
@@ -19,8 +20,6 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import kotlin.test.Test
-import kotlin.test.assertContains
-import kotlin.test.assertEquals
 
 class KmpModuleRecipeTest : KoinTest {
     @get:Rule
@@ -74,18 +73,5 @@ class KmpModuleRecipeTest : KoinTest {
                 ),
             actual = assets.map { it.relativePath },
         )
-    }
-
-    private fun assertListEquals(
-        expected: List<String>,
-        actual: List<String>,
-    ) {
-        assertEquals(expected.count(), actual.count())
-        expected.forEach {
-            assertContains(actual, it, "Expected $it not found in $actual")
-        }
-        actual.forEach {
-            assertContains(expected, it, "Unexpected $it found in $actual")
-        }
     }
 }

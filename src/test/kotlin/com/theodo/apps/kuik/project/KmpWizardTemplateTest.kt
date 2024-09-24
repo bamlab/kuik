@@ -2,6 +2,7 @@ package com.theodo.apps.kuik.project
 
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.openapi.project.Project
+import com.theodo.apps.kuik.assertListEquals
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.module.KmpModuleRecipe
 import com.theodo.apps.kuik.module.extrafilemodifier.AddKoinModuleToMainKoinModule
@@ -57,17 +58,66 @@ class KmpWizardTemplateTest : KoinTest {
     fun `Can run KmpWizardTemplate without error`() {
         // Given
         val template by inject<KmpWizardTemplate>()
+        val model =
+            KmpModuleModel().apply {
+                packageName = "com.theodo.kuik"
+                composeName = "mainApp"
+            }
 
         // When
         val assets =
             template.defineAssets(
-                model = KmpModuleModel(),
+                model = model,
             )
 
-        // Then no throw
-        assets.forEach {
-            println(it.relativePath)
-        }
+        // Then
+        assertListEquals(
+            expected =
+                listOf(
+                    "feature",
+                    "core",
+                    "domain",
+                    "data",
+                    "build.gradle.kts",
+                    "settings.gradle.kts",
+                    "gradle.properties",
+                    "gradle/wrapper/gradle-wrapper.properties",
+                    "gradle/libs.versions.toml",
+                    "mainapp/src/commonMain/kotlin/com/theodo/kuik/mainapp/App.kt",
+                    "mainapp/src/commonMain/composeResources/drawable/compose-multiplatform.xml",
+                    "mainapp/build.gradle.kts",
+                    "mainapp/src/commonMain/kotlin/com/theodo/kuik/mainapp/di/appModule.kt",
+                    "mainapp/src/commonMain/kotlin/com/theodo/kuik/mainapp/di/initKoin.kt",
+                    "mainapp/src/commonMain/kotlin/com/theodo/kuik/mainapp/logging/initLogger.kt",
+                    "mainapp/src/androidMain/kotlin/com/theodo/kuik/mainapp/MainActivity.kt",
+                    "mainapp/src/androidMain/AndroidManifest.xml",
+                    "mainapp/src/androidMain/res/values/strings.xml",
+                    "mainapp/src/iosMain/kotlin/com/theodo/kuik/mainapp/MainViewController.kt",
+                    "iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/configuration",
+                    "iosApp/iosApp/ContentView.swift",
+                    "iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/Contents.json",
+                    "iosApp/iosApp/Assets.xcassets/AccentColor.colorset/Contents.json",
+                    "iosApp/iosApp/Assets.xcassets/Contents.json",
+                    "iosApp/iosApp/Preview Content/Preview Assets.xcassets/Contents.json",
+                    "iosApp/iosApp/iOSApp.swift",
+                    "iosApp/Configuration/Config.xcconfig",
+                    "iosApp/iosApp.xcodeproj/project.pbxproj",
+                    "iosApp/iosApp/Info.plist",
+                    "build-logic/gradle.properties",
+                    "build-logic/settings.gradle.kts",
+                    "build-logic/convention/build.gradle.kts",
+                    "build-logic/convention/src/main/kotlin/Libs.kt",
+                    "build-logic/convention/src/main/kotlin/KotlinMultiplatformFeatureModule.kt",
+                    "build-logic/convention/src/main/kotlin/KotlinMultiplatformDataModule.kt",
+                    "build-logic/convention/src/main/kotlin/KotlinMultiplatformCoreModule.kt",
+                    "build-logic/convention/src/main/kotlin/KotlinMultiplatformDomainModule.kt",
+                    "build-logic/convention/src/main/kotlin/KotlinMultiplatformModule.kt",
+                    "build-logic/convention/src/main/kotlin/KmpModule.kt",
+                    "build-logic/convention/src/main/kotlin/AndroidSdkVersion.kt",
+                "build-logic/convention/src/main/kotlin/KmpTargets.kt",
+            ),
+            actual = assets.map { it.relativePath },
+        )
     }
 
     companion object {
