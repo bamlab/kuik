@@ -5,16 +5,18 @@ import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.intellij.ide.starters.local.GeneratorTemplateFile
-import com.intellij.openapi.project.ProjectManager
 import com.theodo.apps.kuik.common.generators.CommonGenerator
 import com.theodo.apps.kuik.common.models.*
 import com.theodo.apps.kuik.common.utils.Utils
+import com.theodo.apps.kuik.module.model.ProjectHelper
 import com.theodo.apps.kuik.project.addon.HomeAddOn
 import com.theodo.apps.kuik.project.addon.NavigationAddOn
 import org.jetbrains.kotlin.idea.core.util.toVirtualFile
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.net.URL
 
-class KmpWizardTemplate {
+class KmpWizardTemplate : KoinComponent {
     val projectTemplate
         get() =
             template {
@@ -141,7 +143,7 @@ class KmpWizardTemplate {
 
         virtualFile?.let { file ->
             addOns.forEach { it.initialize(model.packageName) }
-            val ftManager = FileTemplateManager.getDefaultInstance()
+            val ftManager by inject<FileTemplateManager>()
             val generatorAssets = mutableListOf<GeneratorAsset>()
             val commonGeneratorList =
                 CommonGenerator(model).generate(
@@ -165,7 +167,7 @@ class KmpWizardTemplate {
                 }
             }
         }
-        val project = ProjectManager.getInstance().openProjects.last() // Careful, dangerous
+        val project = ProjectHelper.getProject()
         addOns.forEach { it.generateAddOnModule(project) }
     }
 }
