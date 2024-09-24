@@ -33,6 +33,7 @@ class KmpModuleRecipeTest : KoinTest {
                     declareMock<AddScreenRoute>()
                     declareMock<AddScreenToNavHost>()
                     declareMock<FileTemplateManager>()
+                    declareMock<ModuleAssetGenerator>()
                     factoryOf(::KmpModuleRecipe)
                 },
             )

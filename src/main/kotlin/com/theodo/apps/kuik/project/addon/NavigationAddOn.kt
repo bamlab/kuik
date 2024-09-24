@@ -11,15 +11,11 @@ import com.theodo.apps.kuik.module.KmpModuleRecipe
 import com.theodo.apps.kuik.module.model.ModuleType
 import com.theodo.apps.kuik.project.createEmptyDirectory
 import org.jetbrains.annotations.VisibleForTesting
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class NavigationAddOn :
-    AddOn(),
-    KoinComponent {
-    private val kmpModuleRecipe: KmpModuleRecipe by inject()
-    private val ftManager: FileTemplateManager by inject()
-
+class NavigationAddOn(
+    private val kmpModuleRecipe: KmpModuleRecipe,
+    private val ftManager: FileTemplateManager,
+) : AddOn() {
     override fun getMainProjectFiles(): List<GeneratorAsset> = emptyList()
 
     override fun moduleType(): ModuleType = ModuleType.CORE
@@ -57,6 +53,6 @@ class NavigationAddOn :
                     "src/commonMain/kotlin/${model.packageName.toFolders()}/${model.moduleLowerCase}/MainDestination.kt",
                     ftManager.getCodeTemplate(TemplateGroup.NAVIGATION_DESTINATIONS),
                 ),
-        ),
+            ),
     )
 }

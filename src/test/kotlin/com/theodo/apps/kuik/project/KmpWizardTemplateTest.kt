@@ -5,6 +5,7 @@ import com.intellij.openapi.project.Project
 import com.theodo.apps.kuik.assertListEquals
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.module.KmpModuleRecipe
+import com.theodo.apps.kuik.module.ModuleAssetGenerator
 import com.theodo.apps.kuik.module.extrafilemodifier.AddKoinModuleToMainKoinModule
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleDepsToMainApp
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleToSettingsGradle
@@ -40,6 +41,7 @@ class KmpWizardTemplateTest : KoinTest {
                     declareMock<AddScreenRoute>()
                     declareMock<AddScreenToNavHost>()
                     declareMock<FileTemplateManager>()
+                    declareMock<ModuleAssetGenerator>()
                     declareMock<ProjectAssetGenerator>()
                     factoryOf(::NavigationAddOn)
                     factoryOf(::HomeAddOn)

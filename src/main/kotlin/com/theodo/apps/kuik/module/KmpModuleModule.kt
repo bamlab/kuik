@@ -11,6 +11,6 @@ object KmpModuleModule {
             includes(ExtraFileModifierKoinModule.module)
             factoryOf(::ModuleAssetGenerator)
             factory { FileTemplateManager.getDefaultInstance() }
-            factory { KmpModuleRecipe() }
+            factoryOf(::KmpModuleRecipe)
         }
 }

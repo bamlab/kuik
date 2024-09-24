@@ -13,11 +13,11 @@ import com.theodo.apps.kuik.project.addon.NavigationAddOn
 import org.jetbrains.annotations.VisibleForTesting
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-import org.koin.core.component.inject
 import java.net.URL
 
 class KmpWizardTemplate(
     private val assetGenerator: ProjectAssetGenerator,
+    private val ftManager: FileTemplateManager,
 ) : KoinComponent {
     val projectTemplate
         get() =
@@ -156,7 +156,6 @@ class KmpWizardTemplate(
     @VisibleForTesting
     fun defineAssets(model: KmpModuleModel): List<GeneratorAsset> {
         addOns.forEach { it.initialize(model.packageName) }
-        val ftManager by inject<FileTemplateManager>()
         val generatorAssets = mutableListOf<GeneratorAsset>()
         val commonGeneratorList =
             CommonGenerator(model).generate(

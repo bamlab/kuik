@@ -7,14 +7,10 @@ import com.theodo.apps.kuik.module.KmpModuleRecipe
 import com.theodo.apps.kuik.module.model.ModuleType
 import com.theodo.apps.kuik.project.createEmptyDirectory
 import org.jetbrains.annotations.VisibleForTesting
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class HomeAddOn :
-    AddOn(),
-    KoinComponent {
-    private val kmpModuleRecipe: KmpModuleRecipe by inject()
-
+class HomeAddOn(
+    private val kmpModuleRecipe: KmpModuleRecipe,
+) : AddOn() {
     override fun getMainProjectFiles(): List<GeneratorAsset> = emptyList()
 
     override fun moduleType(): ModuleType = ModuleType.FEATURE
@@ -53,6 +49,6 @@ class HomeAddOn :
                 //    "src/commonMain/kotlin/${model.packageName.toFolders()}/${model.moduleLowerCase}/di/homeKoinModule.kt",
                 //    FileTemplateManager.getDefaultInstance().getCodeTemplate(TemplateGroup.HOME_DI_MODULE),
                 // ),
-        ),
+            ),
     )
 }

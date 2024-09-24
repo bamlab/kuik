@@ -16,11 +16,11 @@ import com.theodo.apps.kuik.module.generators.factory.ModuleGeneratorFactory
 import org.jetbrains.annotations.VisibleForTesting
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-import org.koin.core.component.inject
 
-class KmpModuleRecipe : KoinComponent {
-    private val assetGenerator by inject<ModuleAssetGenerator>()
-
+class KmpModuleRecipe(
+    private val assetGenerator: ModuleAssetGenerator,
+    private val ftManager: FileTemplateManager,
+) : KoinComponent {
     fun executeRecipe(
         project: Project,
         model: KmpModuleModel,
@@ -66,8 +66,6 @@ class KmpModuleRecipe : KoinComponent {
         model: KmpModuleModel,
         additionalAssets: List<GeneratorAsset> = emptyList(),
     ): List<GeneratorAsset> {
-        val ftManager by inject<FileTemplateManager>()
-
         val generatorAssets = mutableListOf<GeneratorAsset>()
         val moduleGenerator = ModuleGeneratorFactory.generate(model)
         val existingFileModifiers =
