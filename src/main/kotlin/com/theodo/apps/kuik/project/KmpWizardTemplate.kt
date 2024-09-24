@@ -9,10 +9,12 @@ import com.theodo.apps.kuik.common.generators.CommonGenerator
 import com.theodo.apps.kuik.common.models.*
 import com.theodo.apps.kuik.common.utils.Utils
 import com.theodo.apps.kuik.module.model.ProjectHelper
+import com.theodo.apps.kuik.project.addon.AddOn
 import com.theodo.apps.kuik.project.addon.HomeAddOn
 import com.theodo.apps.kuik.project.addon.NavigationAddOn
 import org.jetbrains.kotlin.idea.core.util.toVirtualFile
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import org.koin.core.component.inject
 import java.net.URL
 
@@ -88,10 +90,10 @@ class KmpWizardTemplate : KoinComponent {
                 }
             }
 
-    private val addOns =
+    private val addOns: List<AddOn> =
         listOf(
-            NavigationAddOn(),
-            HomeAddOn(),
+            get<NavigationAddOn>(),
+            get<HomeAddOn>(),
         )
 
     private fun projectRecipe(

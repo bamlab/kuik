@@ -5,8 +5,14 @@ import com.intellij.openapi.project.Project
 import com.theodo.apps.kuik.module.KmpModuleRecipe
 import com.theodo.apps.kuik.module.model.ModuleType
 import com.theodo.apps.kuik.project.createEmptyDirectory
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class HomeAddOn : AddOn() {
+class HomeAddOn :
+    AddOn(),
+    KoinComponent {
+    private val kmpModuleRecipe: KmpModuleRecipe by inject()
+
     override fun getMainProjectFiles(): List<GeneratorAsset> = emptyList()
 
     override fun moduleType(): ModuleType = ModuleType.FEATURE
@@ -24,7 +30,7 @@ class HomeAddOn : AddOn() {
                     model.moduleLowerCase,
                 )
 
-            KmpModuleRecipe().executeRecipe(
+            kmpModuleRecipe.executeRecipe(
                 project = project,
                 model = model,
                 moduleDir = moduleDir,
