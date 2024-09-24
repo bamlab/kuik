@@ -9,6 +9,7 @@ object KmpProjectModule {
     val module =
         module {
             includes(KmpModuleModule.module, AddOnModule.module)
+            factoryOf(::ProjectAssetGenerator)
             factoryOf(::KmpWizardTemplate)
         }
 }

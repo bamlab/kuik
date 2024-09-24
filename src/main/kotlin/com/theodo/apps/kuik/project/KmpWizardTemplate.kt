@@ -16,8 +16,9 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import java.net.URL
 
-class KmpWizardTemplate : KoinComponent {
-    private val assetGenerator by inject<ProjectAssetGenerator>()
+class KmpWizardTemplate(
+    private val assetGenerator: ProjectAssetGenerator,
+) : KoinComponent {
     val projectTemplate
         get() =
             template {
