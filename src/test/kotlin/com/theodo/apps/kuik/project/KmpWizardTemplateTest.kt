@@ -1,8 +1,5 @@
 package com.theodo.apps.kuik.project
 
-import com.android.ide.common.repository.AgpVersion
-import com.android.tools.idea.wizard.template.Language
-import com.android.tools.idea.wizard.template.ProjectTemplateData
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.openapi.project.Project
 import com.theodo.apps.kuik.common.models.KmpModuleModel
@@ -29,7 +26,6 @@ import org.koin.test.KoinTestRule
 import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
-import java.io.File
 
 class KmpWizardTemplateTest : KoinTest {
     @get:Rule
@@ -63,29 +59,16 @@ class KmpWizardTemplateTest : KoinTest {
         val template by inject<KmpWizardTemplate>()
 
         // When
-        template.defineAssets(
-            projectData = mockProjectTemplateData(),
-            model = KmpModuleModel(),
-            dataModel = mapOf(),
-        )
+        val assets =
+            template.defineAssets(
+                model = KmpModuleModel(),
+            )
 
         // Then no throw
+        assets.forEach {
+            println(it.relativePath)
+        }
     }
-
-    private fun mockProjectTemplateData() =
-        ProjectTemplateData(
-            androidXSupport = false,
-            agpVersion = AgpVersion.parse("8.5.2"),
-            sdkDir = null,
-            language = Language.Kotlin,
-            kotlinVersion = "2.0.0",
-            rootDir = File(""),
-            applicationPackage = null,
-            includedFormFactorNames = mapOf(),
-            debugKeystoreSha1 = null,
-            overridePathCheck = null,
-            isNewProject = true,
-        )
 
     companion object {
         @JvmStatic

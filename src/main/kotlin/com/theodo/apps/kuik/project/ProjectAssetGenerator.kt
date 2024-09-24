@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.idea.core.util.toVirtualFile
 class ProjectAssetGenerator {
     fun generateAssets(
         projectData: ProjectTemplateData,
-        generatorAssets: MutableList<GeneratorAsset>,
+        generatorAssets: List<GeneratorAsset>,
         dataModel: Map<String, Any>,
     ) {
         val virtualFile = projectData.rootDir.toVirtualFile()

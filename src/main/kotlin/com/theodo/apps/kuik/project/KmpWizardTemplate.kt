@@ -139,31 +139,26 @@ class KmpWizardTemplate : KoinComponent {
                 model.hasServer(),
             )
 
-        defineAssets(
+        assetGenerator.generateAssets(
             projectData = projectData,
-            model = model,
+            generatorAssets = defineAssets(model = model),
             dataModel = dataModel,
         )
+        val project = ProjectHelper.getProject()
+        addOns.forEach { it.generateAddOnModule(project) }
     }
 
     @VisibleForTesting
-    fun defineAssets(
-        projectData: ProjectTemplateData,
-        model: KmpModuleModel,
-        dataModel: Map<String, Any>,
-    ) {
+    fun defineAssets(model: KmpModuleModel): List<GeneratorAsset> {
         addOns.forEach { it.initialize(model.packageName) }
         val ftManager by inject<FileTemplateManager>()
         val generatorAssets = mutableListOf<GeneratorAsset>()
         val commonGeneratorList =
             CommonGenerator(model).generate(
-                generatorAssets,
                 ftManager,
             )
         generatorAssets.addAll(commonGeneratorList)
         generatorAssets.addAll(addOns.flatMap { it.getMainProjectFiles() })
-        assetGenerator.generateAssets(projectData, generatorAssets, dataModel)
-        val project = ProjectHelper.getProject()
-        addOns.forEach { it.generateAddOnModule(project) }
+        return generatorAssets
     }
 }
