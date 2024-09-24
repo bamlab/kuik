@@ -3,13 +3,9 @@ package com.theodo.apps.kuik.module
 import com.android.tools.idea.nav.safeargs.psi.java.toUpperCamelCase
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
-import com.intellij.ide.starters.local.GeneratorEmptyDirectory
-import com.intellij.ide.starters.local.GeneratorTemplateFile
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.theodo.apps.kuik.common.models.*
-import com.theodo.apps.kuik.common.utils.Utils
 import com.theodo.apps.kuik.module.extrafilemodifier.AddKoinModuleToMainKoinModule
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleDepsToMainApp
 import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleToSettingsGradle
@@ -23,6 +19,8 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 
 class KmpModuleRecipe : KoinComponent {
+    private val assetGenerator by inject<ModuleAssetGenerator>()
+
     fun executeRecipe(
         project: Project,
         model: KmpModuleModel,
@@ -35,7 +33,7 @@ class KmpModuleRecipe : KoinComponent {
                 model = model,
                 additionalAssets = additionalAssets,
             )
-        generateAssets(
+        assetGenerator.generateAssets(
             moduleDir = moduleDir,
             generatorAssets = assetsToGenerate,
             templateData = templateData(model),
@@ -97,33 +95,5 @@ class KmpModuleRecipe : KoinComponent {
         generatorAssets.addAll(moduleCommonList)
 
         return generatorAssets
-    }
-
-    private fun generateAssets(
-        moduleDir: VirtualFile,
-        generatorAssets: List<GeneratorAsset>,
-        templateData: Map<String, Any>,
-    ) {
-        generatorAssets.forEach { asset ->
-            when (asset) {
-                is GeneratorEmptyDirectory -> createEmptyDirectory(moduleDir, asset.relativePath)
-                is GeneratorTemplateFile ->
-                    Utils.generateFileFromTemplate(
-                        templateName = "${asset.template.name}.${asset.template.extension}",
-                        dataModel = templateData,
-                        outputDir = moduleDir,
-                        outputFilePath = asset.relativePath,
-                    )
-
-                else -> println("Module Generator: Nothing")
-            }
-        }
-    }
-
-    private fun createEmptyDirectory(
-        parent: VirtualFile,
-        path: String,
-    ) {
-        VfsUtil.createDirectoryIfMissing(parent, path)
     }
 }
