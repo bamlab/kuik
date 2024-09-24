@@ -3,9 +3,12 @@
 DevX tools for Kotlin Multiplatform projects:
 
 - Quickly create a new Kotlin Multiplatform project (android + iOS)
-- Quickly add a new module to your standard Kotlin Multiplatform project
+- Quickly add a new module to your standard existing Kotlin Multiplatform
+  project
 - Follow Theodo best practices for Kotlin Multiplatform projects
 - Uses Theodo chosen libraries for Kotlin Multiplatform projects
+
+Theodo apps website: https://www.bam.tech/en
 
 ## Installation
 
