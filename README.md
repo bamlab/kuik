@@ -1,5 +1,6 @@
 # Kuik IntelliJ/Android Studio Plugin
 
+<!-- Plugin description -->
 DevX tools for Kotlin Multiplatform projects:
 
 - Quickly create a new Kotlin Multiplatform project (android + iOS)
@@ -9,7 +10,7 @@ DevX tools for Kotlin Multiplatform projects:
 - Uses Theodo chosen libraries for Kotlin Multiplatform projects
 
 Theodo apps website: https://www.bam.tech/en
-
+<!-- Plugin description end -->
 ## Installation
 
 Search Kuik in the IntelliJ/Android Studio plugin marketplace and install it.

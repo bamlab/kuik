@@ -1,0 +1,22 @@
+[versions]
+# libraries
+koin = "4.0.0"
+mockk = "1.13.12"
+
+# plugins
+changelog = "2.2.1"
+intelliJPlatform = "2.1.0"
+kotlin = "2.0.0"
+
+[libraries]
+koin-jvm = { group = "io.insert-koin", name = "koin-core-jvm", version.ref = "koin" }
+koin-test = { group = "io.insert-koin", name = "koin-test-jvm", version.ref = "koin" }
+koin-junit = { group = "io.insert-koin", name = "koin-test-junit", version.ref = "koin" }
+mockk = { group = "io.mockk", name = "mockk-jvm", version.ref = "mockk" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
+
+[plugins]
+changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
+intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "intelliJPlatform" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

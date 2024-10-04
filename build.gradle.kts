@@ -1,15 +1,19 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.changelog.markdownToHTML
 
 plugins {
-    id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.0.0"
-    id("org.jetbrains.intellij") version "1.17.4"
-    id("idea")
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
+    id("java") // Java support
+    alias(libs.plugins.kotlin) // Kotlin support
+    alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
+    alias(libs.plugins.changelog) // Gradle Changelog Plugin
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "com.theodo.apps"
 version = "1.0.0"
+
+kotlin {
+    jvmToolchain(21)
+}
 
 repositories {
     mavenCentral()
@@ -24,25 +28,19 @@ repositories {
     maven {
         url = uri("https://www.jetbrains.com/intellij-repository/releases")
     }
-}
-
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
-intellij {
-    val platformType = providers.gradleProperty("platformType")
-    val platformVersion = providers.gradleProperty("platformVersion")
-
-    type.set(platformType)
-    version.set(platformVersion)
-
-    plugins.set(
-        listOf(
-            "org.jetbrains.android",
-            "com.intellij.java",
-        ),
-    )
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 dependencies {
+    intellijPlatform {
+        //androidStudio("2024.2.1.9") // BUGGED https://intellij-support.jetbrains.com/hc/zh-cn/community/posts/21609427066130-Missing-essential-plugins-com-android-tools-design-org-jetbrains-android?page=1#community_comment_21621601482770
+        androidStudio("2024.1.3.3")
+        instrumentationTools()
+        bundledPlugin("org.jetbrains.android")
+
+    }
     implementation("org.freemarker:freemarker:2.3.31")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.0.20")
     testImplementation("io.mockk:mockk-jvm:1.13.12")
@@ -51,33 +49,42 @@ dependencies {
     testImplementation("io.insert-koin:koin-test-junit4:4.0.0")
 }
 
-tasks {
-    withType<JavaCompile> {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
-    }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
+intellijPlatform {
+    pluginConfiguration {
+        version = "1.0.0"
+
+        // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
+        description = providers.fileContents(layout.projectDirectory.file("README.md")).asText.map {
+            val start = "<!-- Plugin description -->"
+            val end = "<!-- Plugin description end -->"
+
+            with(it.lines()) {
+                if (!containsAll(listOf(start, end))) {
+                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                }
+                subList(indexOf(start) + 1, indexOf(end)).joinToString("\n").let(::markdownToHTML)
+            }
+        }
+
+        ideaVersion {
+            sinceBuild = "231"
         }
     }
 
-    patchPluginXml {
-        sinceBuild.set("231")
-        untilBuild.set("241.*")
+    signing {
+        certificateChain = System.getenv("KUIK_CERTIFICATE_CHAIN")
+        privateKey = System.getenv("KUIK_CERTIFICATE_KEY")
+        password = System.getenv("KUIK_CERTIFICATE_PASSWORD")
     }
 
-    signPlugin {
-        certificateChain.set(System.getenv("KUIK_CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("KUIK_CERTIFICATE_KEY"))
-        password.set(System.getenv("KUIK_CERTIFICATE_PASSWORD"))
+    publishing {
+        token = System.getenv("KUIK_PUBLISH_TOKEN")
+        channels = listOf("beta")
     }
 
-    publishPlugin {
-        token.set(System.getenv("INTELLIJ_PLUGINS_TOKEN"))
+    pluginVerification {
+        ides {
+            recommended()
+        }
     }
-}
-
-configurations.all {
-    exclude("org.slf4j", "slf4j-api")
 }
