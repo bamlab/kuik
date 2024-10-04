@@ -1,5 +1,6 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
+import org.jetbrains.intellij.platform.gradle.extensions.IntelliJPlatformExtension
 
 plugins {
     id("java") // Java support
@@ -41,7 +42,13 @@ dependencies {
 
 intellijPlatform {
     pluginConfiguration {
+        name = "Kotlin Multiplatform Kuik"
         version = providers.gradleProperty("pluginVersion")
+        vendor {
+            name = "Dennis Bordet"
+            email = "dennis.bordet@theodo.com"
+        }
+
 
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
         description = providers.fileContents(layout.projectDirectory.file("README.md")).asText.map {
