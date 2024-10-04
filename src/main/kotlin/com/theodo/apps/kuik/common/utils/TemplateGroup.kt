@@ -61,4 +61,5 @@ object TemplateGroup {
     const val NAVIGATION_DESTINATIONS = "navigation_destinations.kt"
     const val HOME_SCREEN = "home_screen.kt"
     const val HOME_DI_MODULE = "home_di_module.kt"
+    const val EDITOR_CONFIG = ".editorconfig"
 }

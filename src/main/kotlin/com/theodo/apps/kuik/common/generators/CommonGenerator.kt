@@ -38,6 +38,10 @@ class CommonGenerator(
                 "build.gradle.kts",
                 ftManager.getCodeTemplate(TemplateGroup.COMPOSE_PROJECT_GRADLE),
             )
+            +GeneratorTemplateFile(
+                ".editorconfig",
+                ftManager.getCodeTemplate(TemplateGroup.EDITOR_CONFIG),
+            )
 
             +GeneratorTemplateFile(
                 "settings.gradle.kts",

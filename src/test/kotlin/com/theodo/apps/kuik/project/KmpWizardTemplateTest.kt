@@ -80,6 +80,7 @@ class KmpWizardTemplateTest : KoinTest {
                     "domain",
                     "data",
                     "build.gradle.kts",
+                    ".editorconfig",
                     "settings.gradle.kts",
                     "gradle.properties",
                     "gradle/wrapper/gradle-wrapper.properties",
