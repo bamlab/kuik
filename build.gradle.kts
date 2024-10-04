@@ -39,14 +39,15 @@ dependencies {
         androidStudio("2024.1.3.3")
         instrumentationTools()
         bundledPlugin("org.jetbrains.android")
-
+        pluginVerifier()
+        zipSigner()
     }
-    implementation("org.freemarker:freemarker:2.3.31")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.0.20")
-    testImplementation("io.mockk:mockk-jvm:1.13.12")
-    implementation("io.insert-koin:koin-core-jvm:4.0.0")
-    testImplementation("io.insert-koin:koin-test-jvm:4.0.0")
-    testImplementation("io.insert-koin:koin-test-junit4:4.0.0")
+    implementation(libs.freemarker)
+    implementation(libs.koin.jvm)
+    testImplementation(libs.koin.test)
+    implementation(libs.koin.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlin.test)
 }
 
 intellijPlatform {

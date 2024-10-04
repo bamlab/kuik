@@ -2,6 +2,7 @@
 # libraries
 koin = "4.0.0"
 mockk = "1.13.12"
+freemarker = "2.3.31"
 
 # plugins
 changelog = "2.2.1"
@@ -14,6 +15,7 @@ koin-test = { group = "io.insert-koin", name = "koin-test-jvm", version.ref = "k
 koin-junit = { group = "io.insert-koin", name = "koin-test-junit", version.ref = "koin" }
 mockk = { group = "io.mockk", name = "mockk-jvm", version.ref = "mockk" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
+freemarker = { group = "org.freemarker", name = "freemarker", version.ref = "freemarker" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
