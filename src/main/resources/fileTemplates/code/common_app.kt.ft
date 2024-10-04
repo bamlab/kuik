@@ -16,7 +16,7 @@ import org.koin.compose.KoinApplication
 @Composable
 @Preview
 fun App() {
-    KoinApplication(::initKoin) {
+    KoinApplication({ initKoin() }) {
         MaterialTheme {
             val navController: NavHostController = rememberNavController()
             NavHost(

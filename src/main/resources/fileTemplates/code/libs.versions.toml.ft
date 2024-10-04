@@ -1,6 +1,6 @@
 [versions]
 
-agp = "8.5.2"
+agp = "8.7.0"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -14,7 +14,7 @@ coil = "3.0.0-alpha10"
 compose-plugin = "1.6.11"
 compose-navigation = "2.8.0-alpha08"
 kotlin = "2.0.20"
-koin = "4.0.0-RC2"
+koin = "4.0.0"
 kotlinter = "4.4.0"
 kotlinx-coroutines = "1.9.0-RC.2"
 kotlinx-serialization = "1.7.2"
@@ -22,7 +22,7 @@ ksp = "2.0.20-1.0.24"
 ktor = "3.0.0-beta-2"
 lifecycleViewmodelCompose = "2.8.0"
 logging_napier = "2.7.1"
-room = "2.7.0-alpha07"
+room = "2.7.0-alpha09"
 
 
 [libraries]
