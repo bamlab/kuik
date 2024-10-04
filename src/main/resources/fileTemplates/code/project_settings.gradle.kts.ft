@@ -29,7 +29,7 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":composeapp")
 <#if HAS_SERVER>
 include(":server")
 </#if>
