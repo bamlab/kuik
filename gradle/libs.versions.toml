@@ -3,6 +3,7 @@
 koin = "4.0.0"
 mockk = "1.13.12"
 freemarker = "2.3.31"
+kotlinter = "4.4.0"
 
 # plugins
 changelog = "2.2.1"
@@ -21,3 +22,4 @@ freemarker = { group = "org.freemarker", name = "freemarker", version.ref = "fre
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
 intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "intelliJPlatform" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }

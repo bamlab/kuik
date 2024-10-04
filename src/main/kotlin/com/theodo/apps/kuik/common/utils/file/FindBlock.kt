@@ -1,6 +1,9 @@
 package com.theodo.apps.kuik.common.utils.file
 
-fun findBlock(block: Regex, content: String): MatchResult? {
+fun findBlock(
+    block: Regex,
+    content: String,
+): MatchResult? {
     val match = block.find(content)
     if (match != null) {
         val startIndex = match.range.first

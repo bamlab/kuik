@@ -46,7 +46,7 @@ class AndroidGenerator(
                 GeneratorEmptyDirectory(
                     "src/androidMain/kotlin/${
                         packageName.toFolders()
-                    }/${params.moduleLowerCase}"
+                    }/${params.moduleLowerCase}",
                 ),
             )
         }

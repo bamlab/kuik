@@ -4,7 +4,9 @@ import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.ide.starters.local.GeneratorEmptyDirectory
 import com.intellij.ide.starters.local.GeneratorTemplateFile
-import com.theodo.apps.kuik.common.generators.*
+import com.theodo.apps.kuik.common.generators.AndroidGenerator
+import com.theodo.apps.kuik.common.generators.IOSGenerator
+import com.theodo.apps.kuik.common.generators.PlatformGenerator
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.common.utils.TemplateGroup
 

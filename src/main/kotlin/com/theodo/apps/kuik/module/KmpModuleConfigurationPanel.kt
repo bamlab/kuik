@@ -3,9 +3,16 @@ package com.theodo.apps.kuik.module
 import com.intellij.util.ui.JBUI
 import com.theodo.apps.kuik.module.model.ModuleType
 import com.theodo.apps.kuik.module.model.ProjectHelper
-import java.awt.*
+import java.awt.GridBagConstraints
+import java.awt.GridBagLayout
 import java.awt.event.ActionListener
-import javax.swing.*
+import javax.swing.Box
+import javax.swing.ButtonGroup
+import javax.swing.JCheckBox
+import javax.swing.JLabel
+import javax.swing.JPanel
+import javax.swing.JRadioButton
+import javax.swing.JTextField
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 

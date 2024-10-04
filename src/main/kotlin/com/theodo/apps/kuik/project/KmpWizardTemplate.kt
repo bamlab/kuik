@@ -1,11 +1,18 @@
 package com.theodo.apps.kuik.project
 
-import com.android.tools.idea.wizard.template.*
+import com.android.tools.idea.wizard.template.Category
+import com.android.tools.idea.wizard.template.FormFactor
+import com.android.tools.idea.wizard.template.ModuleTemplateData
+import com.android.tools.idea.wizard.template.TemplateData
+import com.android.tools.idea.wizard.template.Thumb
+import com.android.tools.idea.wizard.template.WizardUiContext
+import com.android.tools.idea.wizard.template.booleanParameter
+import com.android.tools.idea.wizard.template.template
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.starters.local.GeneratorAsset
 import com.intellij.openapi.project.Project
 import com.theodo.apps.kuik.common.generators.CommonGenerator
-import com.theodo.apps.kuik.common.models.*
+import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.module.model.ProjectHelper
 import com.theodo.apps.kuik.project.addon.AddOn
 import com.theodo.apps.kuik.project.addon.HomeAddOn
