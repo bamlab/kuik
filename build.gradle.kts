@@ -5,29 +5,17 @@ plugins {
     alias(libs.plugins.kotlin) // Kotlin support
     alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
-    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "com.theodo.apps"
 version = "1.0.0"
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
-    google()
-    maven {
-        url = uri("https://www.jetbrains.com/intellij-repository/snapshots/")
-    }
-    maven {
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-    }
-    maven {
-        url = uri("https://www.jetbrains.com/intellij-repository/releases")
-    }
     intellijPlatform {
         defaultRepositories()
     }
