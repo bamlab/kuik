@@ -28,14 +28,12 @@ class KmpModuleModel : WizardModel() {
 
     override fun handleFinished() {
     }
+
+    fun hasAndroid() = "HAS_ANDROID" to hasAndroid
+    fun hasIOS() = "HAS_IOS" to hasIOS
+    fun hasWeb() = "HAS_WEB" to hasWeb
+    fun hasDesktop() = "HAS_DESKTOP" to hasDesktop
+    fun hasServer() = "HAS_SERVER" to hasServer
 }
 
-fun KmpModuleModel.hasAndroid() = "HAS_ANDROID" to hasAndroid
 
-fun KmpModuleModel.hasIOS() = "HAS_IOS" to hasIOS
-
-fun KmpModuleModel.hasWeb() = "HAS_WEB" to hasWeb
-
-fun KmpModuleModel.hasDesktop() = "HAS_DESKTOP" to hasDesktop
-
-fun KmpModuleModel.hasServer() = "HAS_SERVER" to hasServer
