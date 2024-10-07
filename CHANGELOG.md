@@ -4,6 +4,19 @@
 
 ## [Unreleased]
 
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.1]
 ### Changed
 
 - Migrate to intelli plugin `2.x`
@@ -18,4 +31,5 @@
 
 [Unreleased]: https://github.com/bamlab/kuik/compare/1.0.0...HEAD
 
+[1.0.1]: https://github.com/bamlab/kuik/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/bamlab/kuik/commits/1.0.0
