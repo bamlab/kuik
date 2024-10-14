@@ -27,11 +27,19 @@ object Utils {
             VfsUtil.createDirectoryIfMissing(outputDir, dirPath)
                 ?: throw IOException("Could not create directory: $dirPath")
 
-        val outputFile = targetDir.createChildData(this, fileName)
-        StringWriter().use { writer ->
-            template.process(dataModel, writer)
-            VfsUtil.saveText(outputFile, writer.toString())
+        val outputFile = try {
+            targetDir.createChildData(this, fileName)
+        } catch (e: IOException) {
+            VfsUtil.refreshAndFindChild(targetDir, fileName)
         }
+        if (outputFile != null) {
+            StringWriter().use { writer ->
+                template.process(dataModel, writer)
+                VfsUtil.saveText(outputFile, writer.toString())
+            }
+        }
+
+
     }
 }
 
