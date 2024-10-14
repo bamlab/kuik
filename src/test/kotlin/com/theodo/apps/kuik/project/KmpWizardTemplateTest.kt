@@ -71,7 +71,6 @@ class KmpWizardTemplateTest : KoinTest {
             template.defineAssets(
                 model = model,
             )
-        // val addOnAssests = template.generateAddOnAssets(mockk(relaxed = true)) // Not ready yet
 
         // Then
         assertListEquals(
