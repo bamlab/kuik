@@ -12,6 +12,8 @@ import com.theodo.apps.kuik.module.model.ModuleType
 import com.theodo.apps.kuik.project.createEmptyDirectory
 import org.jetbrains.annotations.VisibleForTesting
 
+// TODO add special build.gradle
+// TODO add new type of assets to just copy files
 class CoreUiAddOn(
     private val kmpModuleRecipe: KmpModuleRecipe,
     private val ftManager: FileTemplateManager,
