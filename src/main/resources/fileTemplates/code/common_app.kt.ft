@@ -1,7 +1,6 @@
 package ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -10,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ${PACKAGE_NAME}.${COMPOSE_NAME_LOWERCASE}.di.initKoin
 import ${PACKAGE_NAME}.core.navigation.MainDestination
+import com.example.myapplication.core.ui.theme.AppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 
@@ -17,7 +17,7 @@ import org.koin.compose.KoinApplication
 @Preview
 fun App() {
     KoinApplication({ initKoin() }) {
-        MaterialTheme {
+        AppTheme {
             val navController: NavHostController = rememberNavController()
             NavHost(
                 navController = navController,
