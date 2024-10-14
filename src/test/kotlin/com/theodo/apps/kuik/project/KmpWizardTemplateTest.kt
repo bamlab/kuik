@@ -12,6 +12,7 @@ import com.theodo.apps.kuik.module.extrafilemodifier.AddModuleToSettingsGradle
 import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenRoute
 import com.theodo.apps.kuik.module.extrafilemodifier.AddScreenToNavHost
 import com.theodo.apps.kuik.module.model.ProjectHelper
+import com.theodo.apps.kuik.project.addon.CoreUiAddOn
 import com.theodo.apps.kuik.project.addon.HomeAddOn
 import com.theodo.apps.kuik.project.addon.NavigationAddOn
 import io.mockk.every
@@ -45,6 +46,7 @@ class KmpWizardTemplateTest : KoinTest {
                     declareMock<ProjectAssetGenerator>()
                     factoryOf(::NavigationAddOn)
                     factoryOf(::HomeAddOn)
+                    factoryOf(::CoreUiAddOn)
                     factoryOf(::KmpModuleRecipe)
                     factoryOf(::KmpWizardTemplate)
                 },

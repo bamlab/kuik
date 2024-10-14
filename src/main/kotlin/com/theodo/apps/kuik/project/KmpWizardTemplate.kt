@@ -15,6 +15,7 @@ import com.theodo.apps.kuik.common.generators.CommonGenerator
 import com.theodo.apps.kuik.common.models.KmpModuleModel
 import com.theodo.apps.kuik.module.model.ProjectHelper
 import com.theodo.apps.kuik.project.addon.AddOn
+import com.theodo.apps.kuik.project.addon.CoreUiAddOn
 import com.theodo.apps.kuik.project.addon.HomeAddOn
 import com.theodo.apps.kuik.project.addon.NavigationAddOn
 import org.jetbrains.annotations.VisibleForTesting
@@ -101,6 +102,7 @@ class KmpWizardTemplate(
         listOf(
             get<NavigationAddOn>(),
             get<HomeAddOn>(),
+            get<CoreUiAddOn>()
         )
 
     private fun projectRecipe(

@@ -61,5 +61,11 @@ object TemplateGroup {
     const val NAVIGATION_DESTINATIONS = "navigation_destinations.kt"
     const val HOME_SCREEN = "home_screen.kt"
     const val HOME_DI_MODULE = "home_di_module.kt"
+    const val THEME_CORE_UI = "theme_core_ui.kt"
+    const val COLOR_CORE_UI = "color_core_ui.kt"
+    const val TYPE_CORE_UI = "type_core_ui.kt"
+    const val RUBIK_MONO_CORE_UI = "rubik_mono_one_regular.ttf"
+    const val RUBIK_CORE_UI = "rubik_variable.ttf"
+    const val RUBIK_ITALIC_CORE_UI = "rubik_variable_italic.ttf"
     const val EDITOR_CONFIG = ".editorconfig"
 }

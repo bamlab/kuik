@@ -8,5 +8,6 @@ object AddOnModule {
         module {
             factoryOf(::NavigationAddOn)
             factoryOf(::HomeAddOn)
+            factoryOf(::CoreUiAddOn)
         }
 }
