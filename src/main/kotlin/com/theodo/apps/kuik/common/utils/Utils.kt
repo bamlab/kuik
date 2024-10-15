@@ -3,6 +3,7 @@ package com.theodo.apps.kuik.common.utils
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import freemarker.template.Configuration
+import freemarker.template.Template
 import java.io.IOException
 import java.io.StringWriter
 
@@ -17,7 +18,7 @@ object Utils {
             Configuration(Configuration.VERSION_2_3_30).apply {
                 setClassLoaderForTemplateLoading(this::class.java.classLoader, "fileTemplates/code")
             }
-        val template = configuration.getTemplate("$templateName.ft")
+        val template: Template = configuration.getTemplate("$templateName.ft")
 
         val outputFilePathParts = outputFilePath.split('/')
         val fileName = outputFilePathParts.last()
@@ -59,14 +60,11 @@ object Utils {
         val targetDir = VfsUtil.createDirectoryIfMissing(outputDir, targetDirPath)
             ?: throw IOException("Could not create directory: $targetDirPath")
 
-        val outputFile = try {
+        try {
             targetDir.createChildData(this, fileName)
         } catch (e: IOException) {
             VfsUtil.refreshAndFindChild(targetDir, fileName)
-        }
-        if (outputFile != null) {
-            VfsUtil.saveText(outputFile, content.toString())
-        }
+        }?.setBinaryContent(content)
 
     }
 
