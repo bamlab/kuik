@@ -41,7 +41,37 @@ object Utils {
 
 
     }
+
+    fun copyFileFromTemplate(
+        fileName: String,
+        outputDir: VirtualFile,
+        outputFilePath: String
+    ) {
+
+        val resourcePath = "/copyFiles/$fileName"
+        val resource = this::class.java.getResourceAsStream(resourcePath)
+            ?: throw IOException("Resource not found: $resourcePath")
+
+        val content = resource.readBytes()
+        val outputFilePathParts = outputFilePath.split('/')
+        val targetDirPath = outputFilePathParts.dropLast(1).joinToString("/")
+
+        val targetDir = VfsUtil.createDirectoryIfMissing(outputDir, targetDirPath)
+            ?: throw IOException("Could not create directory: $targetDirPath")
+
+        val outputFile = try {
+            targetDir.createChildData(this, fileName)
+        } catch (e: IOException) {
+            VfsUtil.refreshAndFindChild(targetDir, fileName)
+        }
+        if (outputFile != null) {
+            VfsUtil.saveText(outputFile, content.toString())
+        }
+
+    }
+
 }
+
 
 fun String.toFolders() =
     replace(

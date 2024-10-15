@@ -25,7 +25,8 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        androidStudio("2024.2.1.9") // BUGGED https://intellij-support.jetbrains.com/hc/zh-cn/community/posts/21609427066130-Missing-essential-plugins-com-android-tools-design-org-jetbrains-android?page=1#community_comment_21621601482770
+        //intellijIdeaCommunity("2024.2.3")
+        androidStudio("2024.2.1.10") // BUGGED https://intellij-support.jetbrains.com/hc/zh-cn/community/posts/21609427066130-Missing-essential-plugins-com-android-tools-design-org-jetbrains-android?page=1#community_comment_21621601482770
         instrumentationTools()
         bundledPlugin("org.jetbrains.android")
         pluginVerifier()

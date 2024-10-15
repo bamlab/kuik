@@ -13,7 +13,6 @@ import com.theodo.apps.kuik.project.createEmptyDirectory
 import org.jetbrains.annotations.VisibleForTesting
 
 // TODO add special build.gradle
-// TODO add new type of assets to just copy files
 class CoreUiAddOn(
     private val kmpModuleRecipe: KmpModuleRecipe,
     private val ftManager: FileTemplateManager,
@@ -68,8 +67,8 @@ class CoreUiAddOn(
             ),
 
             GeneratorTemplateFile(
-                "src/commonMain/composeResources/font/rubik_mono_one_regular.ttf",
-                ftManager.getCodeTemplate(TemplateGroup.RUBIK_MONO_CORE_UI),
+                relativePath = "src/commonMain/composeResources/font/rubik_mono_one_regular.ttf",
+                template = ftManager.getCodeTemplate(TemplateGroup.RUBIK_MONO_CORE_UI),
             ),
             GeneratorTemplateFile(
                 "src/commonMain/composeResources/font/rubik_variable.ttf",
