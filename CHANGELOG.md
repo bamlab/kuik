@@ -6,6 +6,8 @@
 
 ### Added
 
+- Theme with color and Typography
+
 ### Changed
 
 ### Deprecated
