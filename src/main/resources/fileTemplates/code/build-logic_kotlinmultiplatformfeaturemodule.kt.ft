@@ -31,7 +31,7 @@ class KotlinMultiplatformFeatureModule : KotlinMultiplatformModule() {
                 .dependencies {
                     implementation(composeLibs.runtime)
                     implementation(composeLibs.foundation)
-                    implementation(composeLibs.material)
+                    implementation(composeLibs.material3)
                     implementation(composeLibs.ui)
                     implementation(composeLibs.components.resources)
                     implementation(composeLibs.components.uiToolingPreview)
