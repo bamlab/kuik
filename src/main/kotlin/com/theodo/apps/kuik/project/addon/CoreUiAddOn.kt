@@ -65,6 +65,10 @@ class CoreUiAddOn(
                 ftManager
                     .getCodeTemplate(TemplateGroup.THEME_CORE_UI),
             ),
+            GeneratorTemplateFile(
+                "build.gradle.kts",
+                ftManager.getCodeTemplate(TemplateGroup.GRADLE_CORE_UI),
+            ),
 
             GeneratorTemplateFile(
                 relativePath = "src/commonMain/composeResources/font/rubik_mono_one_regular.ttf",

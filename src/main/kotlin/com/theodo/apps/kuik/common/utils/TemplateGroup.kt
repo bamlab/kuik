@@ -67,5 +67,6 @@ object TemplateGroup {
     const val RUBIK_MONO_CORE_UI = "rubik_mono_one_regular.ttf"
     const val RUBIK_CORE_UI = "rubik_variable.ttf"
     const val RUBIK_ITALIC_CORE_UI = "rubik_variable_italic.ttf"
+    const val GRADLE_CORE_UI = "gradle_core_ui.kts"
     const val EDITOR_CONFIG = ".editorconfig"
 }
