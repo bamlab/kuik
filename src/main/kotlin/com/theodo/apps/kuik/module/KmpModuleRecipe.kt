@@ -86,11 +86,12 @@ class KmpModuleRecipe(
         for (modifier in existingFileModifiers) {
             modifier.modify(model, project)
         }
-        // 3 - Add additional assets can override module files
-        generatorAssets.addAll(additionalAssets)
-        // 4 - Generate module files
+        // 3 - Generate module files
         val moduleCommonList = moduleGenerator.generate(ftManager, model.packageName)
         generatorAssets.addAll(moduleCommonList)
+
+        // 4 - Add additional assets can override module files
+        generatorAssets.addAll(additionalAssets)
 
         return generatorAssets
     }
